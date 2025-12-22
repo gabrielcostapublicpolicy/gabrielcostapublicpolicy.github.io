@@ -1,0 +1,39 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "Income Inequality (Gini Index): Brazil vs. Colombia",
+    "subtitle": "0 = Perfect equality, 100 = Perfect inequality. Source: World Bank",
+    "anchor": "start"
+  },
+  "data": {
+    "url": "https://raw.githubusercontent.com/gabrielcostapublicpolicy/gabrielcostapublicpolicy.github.io/refs/heads/main/inequality_comparison.csv",
+    "format": {"type": "csv"}
+  },
+  "width": 500,
+  "height": 300,
+  "layer": [
+    {
+      "mark": {"type": "line", "point": true, "tooltip": true},
+      "encoding": {
+        "x": {"field": "Year", "type": "ordinal", "title": "Year"},
+        "y": {
+          "field": "Gini_Index",
+          "type": "quantitative",
+          "title": "Gini Index Score",
+          "scale": {"domain": [45, 56]}
+        },
+        "color": {
+          "field": "Country",
+          "type": "nominal",
+          "scale": {"range": ["#009c3b", "#fcd116"]},
+          "title": "Country"
+        }
+      }
+    },
+    {
+      "mark": {"type": "rule", "color": "gray", "strokeDash": [4, 4]},
+      "encoding": {"x": {"datum": "2020"}}
+    }
+  ],
+  "config": {}
+}
