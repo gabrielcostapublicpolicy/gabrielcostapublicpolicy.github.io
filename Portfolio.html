@@ -114,6 +114,15 @@
     </div>
     <figure id="Location7"></figure> 
 </section>
+<section>
+    <h2>Section 5: Accessing Data (API & Scraper)</h2>
+    <p>This chart is powered by a live connection to the FRED API, tracking US labor productivity.</p>
+
+    <figure id="Location8"></figure>
+
+    <p><strong>API Description:</strong> I used the FRED API to fetch labor productivity data (ID: OPHNFB) in JSON format, linking my unique API key to ensure live data updates.</p>
+</section>
+
 
     <!-- Do you want to add more sections? -->
         <!-- Try copying pasting the section above -->
@@ -136,7 +145,7 @@
         vegaEmbed('#Location5', "wk3_poverty brazil mexico.json") // We're using the vegaEmbed function to put a graph in the element with id figure_3
         vegaEmbed('#Location6', "wk3_gini brazil colombia.json") // We're using the vegaEmbed function to put a graph in the element with id figure_3
         vegaEmbed('#Location7', "wk4_inflation_corrected.json") // We're using the vegaEmbed function to put a graph in the element with id figure_3
-
+        vegaEmbed('#Location8', "wk5_productivity_api.json")
 
         // Do you want to add more graphs?
         // try defining a new variable for figure_3_spec, adding VegaEmbed for Location3, and adding a new section in the HTML
