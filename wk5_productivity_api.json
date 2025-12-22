@@ -1,15 +1,15 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "data": {
+    "url": "https://corsproxy.io/?https://api.stlouisfed.org/fred/series/observations?series_id=OPHNFB&api_key=8c58ebb015ad40ff74a5997839bce83a&file_type=json",
+    "format": {"type": "json", "property": "observations"}
+  },
   "title": {
     "text": "US Labor Productivity Index",
     "subtitle": "Real output per hour, business sector. Source: FRED API",
     "anchor": "start"
   },
-  "data": {
-    "url": "https://api.stlouisfed.org/fred/series/observations?series_id=OPHNFB&api_key=8c58ebb015ad40ff74a5997839bce83a&file_type=json",
-    "format": {"type": "json", "property": "observations"}
-  },
-  "width": 450,
+  "width": 400,
   "height": 300,
   "mark": {"type": "line", "color": "#2c3e50"},
   "encoding": {
@@ -18,7 +18,7 @@
       "field": "value",
       "type": "quantitative",
       "title": "Index (2012=100)",
-      "scale": {"zero": false}
+      "scale": {"zero": true}
     }
   },
   "config": {}
