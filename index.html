@@ -48,38 +48,81 @@
     </h1>
     <p style="margin-top: 0px; color: darkblue">
         <!-- we're setting the margin to 0px so the header and authour name are close together -->
-        Gabriel Costa | <a href="https://www.linkedin.com/in/YOUR_LINKEDIN/">LinkedIn</a> | <a
-            href="https://www.github.com/YOUR_GITHUB">GitHub</a>
+        My work | <a href="https://www.linkedin.com/in/gabriel-costa-468567156/">LinkedIn</a> | <a
+            href="https://github.com/gabrielcostapublicpolicy/gabrielcostapublicpolicy.github.io">GitHub</a>
     </p>
     <h3 class="small"> <!-- We have added a class to the header called "small" which we can use to style it in the CSS -->
-        This page acts as your portfolio of charts. You can use it as a good starting point to display your work but make sure to customise it to make it your own, or even start from scratch.  
+        Welcome to my portfolio. Here you'll find some of my work visualising data on economic policy topics.  
     </h3>
 
     <!-- We're organising the page into sections, with each section containing a chart, title and a description -->
     <section>
         <div class="chart-description">
-            <h2>Section 1: A basic chart</h2>
+            <h2>Section 1: Displaying charts using the vegaEmbed function</h2>
             <p> <!-- This is a paragraph, it's the main way to display text on a web page -->
-                We've organised the page into sections, with each section containing a chart, title and a description. Here, we can describe the chart and give some context.
-                As a first example, we're using a basic chart from our repo.
+                This interactive line chart tracks the real GDP growth of four diverse economies since 1980, indexing data to compare long-term development trends.
             </p>
         </div>
         <figure id="Location1"></figure> <!-- we give it an id so we can put a vega-lite graph here with VegaEmbed -->
     </section>
+     <p> <!-- This is a paragraph, it's the main way to display text on a web page -->
+                A scatter plot analyzing the correlation between median income and firearm deaths across US states, with bubble sizes representing regional prison rates.
+            </p>
     <figure id="Location2"></figure> <!-- we give it an id so we can put a vega-lite graph here with VegaEmbed -->
     </section>
 <section>
         <div class="chart-description">
-            <h2>Section 1: A basic chart</h2>
+            <h4>Section 2: Creating my own visualisations</h4>
             <p> <!-- This is a paragraph, it's the main way to display text on a web page -->
-                We've organised the page into sections, with each section containing a chart, title and a description. Here, we can describe the chart and give some context.
-                As a first example, we're using a basic chart from our repo.
+                Add text here for figure 3.
             </p>
         </div>
         <figure id="Location3"></figure> <!-- we give it an id so we can put a vega-lite graph here with VegaEmbed -->
     </section>
+        <p> <!-- This is a paragraph, it's the main way to display text on a web page -->
+                    Add text here for figure 4.
+                </p>
     <figure id="Location4"></figure> <!-- we give it an id so we can put a vega-lite graph here with VegaEmbed -->
     </section>
+<section>
+        <div class="chart-description">
+            <h2>Section 3: Debating</h2>
+            <p> <!-- This is a paragraph, it's the main way to display text on a web page -->
+                Brazil’s poverty dropped sharply in 2020 due to expansive emergency cash transfers, while Mexico saw rising poverty, reflecting a lack of similar large-scale pandemic relief.
+            </p>
+        </div>
+        <figure id="Location5"></figure> <!-- we give it an id so we can put a vega-lite graph here with VegaEmbed -->
+    </section>
+     <p> <!-- This is a paragraph, it's the main way to display text on a web page -->
+                Brazil’s poverty plummeted in 2020 due to massive pandemic transfers, while Colombia’s inequality spiked, highlighting the divergent impacts of their respective social safety net responses.
+            </p>
+    <figure id="Location6"></figure> <!-- we give it an id so we can put a vega-lite graph here with VegaEmbed -->
+    </section>
+    <section>
+    <div class="chart-description">
+        <h2>Section 4: Replication and Improvement</h2>
+        <p> 
+            This inflation chart from Globo News is misleading because the Y-axis starts at 4%, and the 5.91% bar is visually taller than the 6.50% bar.
+        </p>
+        <img src="globo_inflation_bad.png" alt="Misleading Inflation Chart" style="width:450px; border: 1px solid #ccc; display: block; margin: 0 auto;">
+    </div>
+
+    <div class="chart-description">
+        <p> 
+            I corrected the original chart's truncated axis and inconsistent bar heights to provide a truthful and mathematically accurate representation of Brazil's annual inflation trends.
+        </p>
+    </div>
+    <figure id="Location7"></figure> 
+</section>
+<section>
+    <h2>Section 5: Accessing Data (API & Scraper)</h2>
+    <p>This chart is powered by a live connection to the FRED API, tracking US labor productivity.</p>
+
+    <figure id="Location8"></figure>
+
+    <p><strong>API Description:</strong> I used the FRED API to fetch labor productivity data (ID: OPHNFB) in JSON format, linking my unique API key to ensure live data updates.</p>
+</section>
+
 
     <!-- Do you want to add more sections? -->
         <!-- Try copying pasting the section above -->
@@ -92,12 +135,17 @@
         // This is a comment in JavaScript - it's a different language to HTML and CSS
 
         // let figure_1_spec = "https://raw.githubusercontent.com/EconomicsObservatory/datavis/refs/heads/main/newsletters/2025-04-17-steel-i-china-rises/config.json"; // We're storing the URL of the graph we want to display in a variable
-        let figure_1_spec = "https://raw.githubusercontent.com/EconomicsObservatory/datavis/refs/heads/main/newsletters/2025-05-02-steel-ii-the-price-effect/visualisation/fig1_steel-price.json"; // We're storing the URL of the graph we want to display in a variable                                                                                                          // You should have a spec for a graph in this same folder. Just specify its name here, e.g. let figure_1_spec = "chart1.json"
-        let figure_2_spec = "fig4_map-french-in-britain.json"; // We're storing the URL of the graph we want to display in a variable    
-        
+        let figure_1_spec = "https://raw.githubusercontent.com/RDeconomist/RDeconomist.github.io/refs/heads/main/charts/library/chartLine10.json"; // We're storing the URL of the graph we want to display in a variable                                                                                                          // You should have a spec for a graph in this same folder. Just specify its name here, e.g. let figure_1_spec = "chart1.json"
+        let figure_2_spec = "https://raw.githubusercontent.com/RDeconomist/RDeconomist.github.io/refs/heads/main/charts/library/chartScatter3.json"; // We're storing the URL of the graph we want to display in a variable    
+
         vegaEmbed('#Location1', figure_1_spec) // We're using the vegaEmbed function to put a graph in the element with id figure_1
-        vegaEmbed('#Location2', figure_2_spec) // We're using the vegaEmbed function to put a graph in the element with id figure_1
- vegaEmbed('#Location3', "wk2_brazil_investment.json") // We're using the vegaEmbed function to put a graph in the element with id figure_1
+        vegaEmbed('#Location2', figure_2_spec) // We're using the vegaEmbed function to put a graph in the element with id figure_2
+        vegaEmbed('#Location3', "wk2_brazil_gdp.json") // We're using the vegaEmbed function to put a graph in the element with id figure_3
+        vegaEmbed('#Location4', "wk2_brazil_inflation.json") // We're using the vegaEmbed function to put a graph in the element with id figure_3
+        vegaEmbed('#Location5', "wk3_poverty brazil mexico.json") // We're using the vegaEmbed function to put a graph in the element with id figure_3
+        vegaEmbed('#Location6', "wk3_gini brazil colombia.json") // We're using the vegaEmbed function to put a graph in the element with id figure_3
+        vegaEmbed('#Location7', "wk4_inflation_corrected.json") // We're using the vegaEmbed function to put a graph in the element with id figure_3
+        vegaEmbed('#Location8', "wk5_productivity_api.json")
 
         // Do you want to add more graphs?
         // try defining a new variable for figure_3_spec, adding VegaEmbed for Location3, and adding a new section in the HTML
