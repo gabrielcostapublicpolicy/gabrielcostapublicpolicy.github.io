@@ -1,0 +1,30 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "Brazil Annual Inflation Rate (IPCA)",
+    "subtitle": "Corrected version with a zero-baseline axis. Source: Globo News",
+    "anchor": "start"
+  },
+  "data": {
+    "url": "https://raw.githubusercontent.com/gabrielcostapublicpolicy/gabrielcostapolicy/refs/heads/main/inflation_bad.csv",
+    "format": {"type": "csv"}
+  },
+  "width": 400,
+  "height": 300,
+  "mark": {"type": "bar", "color": "#00796b", "tooltip": true},
+  "encoding": {
+    "x": {
+      "field": "Year",
+      "type": "ordinal",
+      "title": "Year",
+      "axis": {"labelAngle": 0}
+    },
+    "y": {
+      "field": "Inflation",
+      "type": "quantitative",
+      "title": "Rate (%)",
+      "scale": {"domain": [0, 8]}
+    }
+  },
+  "config": {}
+}
