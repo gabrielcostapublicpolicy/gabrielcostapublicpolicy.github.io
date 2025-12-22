@@ -1,0 +1,38 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "Extreme Poverty Headcount Ratio: Brazil vs. Mexico",
+    "subtitle": "% of population living below $2.15 a day (2017 PPP). Source: World Bank",
+    "anchor": "start"
+  },
+  "data": {
+    "url": "https://raw.githubusercontent.com/gabrielcostapublicpolicy/gabrielcostapublicpolicy.github.io/refs/heads/main/comparative_poverty.csv",
+    "format": {"type": "csv"}
+  },
+  "width": 500,
+  "height": 300,
+  "layer": [
+    {
+      "mark": {"type": "line", "point": true, "tooltip": true},
+      "encoding": {
+        "x": {"field": "Year", "type": "ordinal", "title": "Year"},
+        "y": {
+          "field": "Rate",
+          "type": "quantitative",
+          "title": "Poverty Rate (%)"
+        },
+        "color": {
+          "field": "Country",
+          "type": "nominal",
+          "scale": {"range": ["#009c3b", "#ce1126"]},
+          "title": "Country"
+        }
+      }
+    },
+    {
+      "mark": {"type": "rule", "color": "gray", "strokeDash": [4, 4]},
+      "encoding": {"x": {"datum": "2020"}}
+    }
+  ],
+  "config": {}
+}
