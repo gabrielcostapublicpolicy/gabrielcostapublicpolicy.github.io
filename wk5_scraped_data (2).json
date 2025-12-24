@@ -1,0 +1,43 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "UK Economic Indicators",
+    "subtitle": "Source: Office for National Statistics (ONS)",
+    "fontSize": 16,
+    "subtitleFontSize": 12,
+    "anchor": "start"
+  },
+  "width": 500,
+  "height": 300,
+  "data": {
+    "url": "https://raw.githubusercontent.com/gabrielcostapublicpolicy/gabrielcostapublicpolicy.github.io/refs/heads/main/wk5_scraped_data.json"
+  },
+  "mark": {"type": "line", "point": true, "strokeWidth": 2},
+  "encoding": {
+    "x": {
+      "field": "Year",
+      "type": "ordinal",
+      "title": "Year",
+      "axis": {"labelAngle": 0}
+    },
+    "y": {"field": "Value", "type": "quantitative", "title": "Value (%)"},
+    "color": {
+      "field": "Indicator",
+      "type": "nominal",
+      "title": "Economic Indicator",
+      "scale": {"scheme": "category10"}
+    },
+    "tooltip": [
+      {"field": "Year", "type": "ordinal", "title": "Year"},
+      {"field": "Indicator", "type": "nominal", "title": "Indicator"},
+      {
+        "field": "Value",
+        "type": "quantitative",
+        "title": "Value",
+        "format": ".1f"
+      },
+      {"field": "Source", "type": "nominal", "title": "Source"}
+    ]
+  },
+  "config": {}
+}
