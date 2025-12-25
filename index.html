@@ -33,11 +33,27 @@
     <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
 
     <style>
-        #chartGrid {
-            display: flex;
-        }
-        
-    </style>
+    /* Grid layout for the CC6 Dashboard */
+#dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Creates 3 columns */
+    gap: 20px;
+    margin-top: 20px;
+}
+
+/* Specific styling for dashboard charts to keep them smaller */
+#dashboard-grid div {
+    width: 100%;
+    height: 250px; 
+}
+
+/* Responsiveness: 1 column on mobile devices */
+@media (max-width: 600px) {
+    #dashboard-grid {
+        grid-template-columns: 1fr;
+    }
+}
+</style>
 </head>
 
 <body> 
@@ -133,7 +149,28 @@
     
     </div>
 </section>
+<section>
+    <div class="chart-description">
+        <h2>CC6: Loops and Dashboards - Diversity & Productivity</h2>
+        <p>
+            This dashboard explores the relationship between workforce diversity and economic productivity in the US. 
+            By using a Python loop to batch-download data from the FRED API, I compare demographic participation 
+            rates with real output and corporate profits.
+        </p>
+        <p>
+            <a href="https://colab.research.google.com/drive/1gcqZ8RKK8jwK4H8j6nRuZNTRL35EEnJu" target="_blank">View Python Automation Notebook</a>
+        </p>
+    </div>
 
+    <div id="dashboard-grid">
+        <div id="chart1"></div>
+        <div id="chart2"></div>
+        <div id="chart3"></div>
+        <div id="chart4"></div>
+        <div id="chart5"></div>
+        <div id="chart6"></div>
+    </div>
+</section>
 
     <!-- Do you want to add more sections? -->
         <!-- Try copying pasting the section above -->
@@ -158,13 +195,21 @@
         vegaEmbed('#Location7', "wk4_inflation_corrected.json") // We're using the vegaEmbed function to put a graph in the element with id figure_3
         vegaEmbed('#Location8', "wk5_productivity_api.json")
         vegaEmbed('#Location9', "wk5_scraped_data (2).json")
+        // CC6: Array containing the 6 JSON files generated in Python
+const dashboardFiles = [
+    "cc6_series1.json", 
+    "cc6_series2.json", 
+    "cc6_series3.json",
+    "cc6_series4.json", 
+    "cc6_series5.json", 
+    "cc6_series6.json"
+];
 
-        // Do you want to add more graphs?
-        // try defining a new variable for figure_3_spec, adding VegaEmbed for Location3, and adding a new section in the HTML
-        // e.g. 
-        // let figure_3_spec = ...
-        // vegaEmbed('#Location3', figure_3_spec)
-
+// JavaScript loop to embed all six charts automatically (2nd point requirement)
+dashboardFiles.forEach((file, index) => {
+    // This dynamically targets #chart1, #chart2, etc.
+    vegaEmbed(`#chart${index + 1}`, file);
+});
 
     </script>
 
