@@ -176,6 +176,32 @@
         <div id="chart6"></div>
     </div>
 </section>
+<section>
+    <div class="chart-description">
+        <h2>CC7: Inequality Maps - Scotland and Wales</h2>
+        <p>
+            The first map is a <strong>coordinates map</strong> of Scotland showing income deprivation. 
+            The second is a <strong>cloropleth</strong> showing the distribution of social support hubs in Wales.
+        </p>
+    </div>
+    <div style="display: flex; justify-content: space-around;">
+        <figure id="Location10"></figure>
+        <figure id="Location11"></figure>
+    </div>
+</section>
+<section>
+    <div class="chart-description">
+        <h2>CC8: Big Data - Extracting a story from millions of prices</h2>
+        <p>
+            Using the AutoCPI dataset, I analyzed daily price fluctuations for essential goods. 
+            I processed millions of observations in Python, grouping them by weekly averages to 
+            visualize inflation trends without compromising website performance.
+        </p>
+    </div>
+    <figure id="Location12"></figure>
+    <figure id="Location13"></figure>
+</section>
+
 
 <!-- Add this CSS in your <head> section or in your CSS file -->
 <style>
@@ -237,7 +263,8 @@ for (let i = 1; i <= 6; i++) {
     // This targets #chart1, #chart2, etc., using files cc6_series1.json, etc.
     vegaEmbed(`#chart${i}`, `cc6_series${i}.json`);
 }
-
+        vegaEmbed('#Location10', 'cc7_scotland_inequality.json');
+        vegaEmbed('#Location11', 'cc7_wales_coordinates.json');
     </script>
 
 </body>
