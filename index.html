@@ -208,6 +208,18 @@
     }
 </script>
 
+
+
+<section>
+  <div class="chart-description">
+    <h2>Task 8: Monthly Average Price and Inflation</h2>
+    <p>
+      This chart shows the monthly average price and the month-on-month inflation rate computed from the microdata.
+    </p>
+  </div>
+  <figure id="Location10"></figure>
+</section>
+
     <!-- Do you want to add more sections? -->
         <!-- Try copying pasting the section above -->
         <!-- You'll need to change the id of the figure "<figure id="Location3"... -->
@@ -237,6 +249,10 @@ for (let i = 1; i <= 6; i++) {
     // This targets #chart1, #chart2, etc., using files cc6_series1.json, etc.
     vegaEmbed(`#chart${i}`, `cc6_series${i}.json`);
 }
+
+vegaEmbed('#Location10', "data/cc8_monthly_inflation_chart.json")
+
+
 
     </script>
 

@@ -1,0 +1,36 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "Monthly Average Price and Month-on-Month Inflation",
+    "subtitle": "Source: cc8_monthly_inflation.csv (Task 8)"
+  },
+  "data": {
+    "url": "https://raw.githubusercontent.com/gabrielcostapublicpolicy/gabrielcostapublicpolicy.github.io/main/data/cc8_monthly_inflation.csv"
+  },
+  "transform": [{"calculate": "toDate(datum.month)", "as": "month_date"}],
+  "vconcat": [
+    {
+      "mark": {"type": "line"},
+      "encoding": {
+        "x": {"field": "month_date", "type": "temporal", "title": "Month"},
+        "y": {
+          "field": "price",
+          "type": "quantitative",
+          "title": "Average Price"
+        }
+      }
+    },
+    {
+      "mark": {"type": "line"},
+      "encoding": {
+        "x": {"field": "month_date", "type": "temporal", "title": "Month"},
+        "y": {
+          "field": "inflation_mom_pct",
+          "type": "quantitative",
+          "title": "Inflation (MoM, %)"
+        }
+      }
+    }
+  ],
+  "config": {}
+}
