@@ -28,111 +28,103 @@
             <p>
                 This project investigates the relationship between labor market participation and poverty reduction in Brazilian state capitals. 
                 The central hypothesis is that employability serves as a primary driver for overcoming extreme poverty. 
-                By analyzing quarterly unemployment data alongside poverty indicators, I aim to test if regions with more robust job growth demonstrate a faster transition out of poverty, providing evidence for targeted employability policies.
-            </p>
-        </section>
-
-        <section id="Data">
-            <h2>Data</h2>
-            <p>
-                The primary dataset is retrieved programmatically from the <strong>IBGE SIDRA API</strong> (Table 4099), focusing on the PNAD Contínua indicators. 
-                The automation process, developed in Python via Google Colab, ensures the pipeline is replicable. 
-                A significant challenge was the data transformation (Wrangling) from a wide format to a long format, making it suitable for time-series visualization.
             </p>
         </section>
 
         <hr>
         
         <article class="chart-container">
-            <h3>Chart 1: Countercatual to Maranhão: Piauí and the parallel trends</h3>
-            <p>The visual analysis of the Difference-in-Differences (DiD) framework reveals a robust Parallel Trends alignment between Maranhão (Treatment) and Piauí (Control) prior to 2016. This validates Piauí as a suitable counterfactual, as both states react similarly to macroeconomic shocks.
-
-The 'policy shock' marked in 2016 corresponds to the full implementation year of the 'Plano Mais IDH' (Decree 30.612/2015) in Maranhão. This program aimed to reduce extreme poverty through integrated actions in health, education, and income generation, such as the 'Mais Renda' employability scheme. However, the data shows no significant divergence in poverty rates between the two states following the intervention.
-
-This 'Null Result' suggests that the structural nature of poverty in Maranhão remains resistant to isolated employability shocks, potentially requiring a longer time-horizon or more intensive capital investment to break the historical parity with Piauí</p>
+            <h3>Chart 1: Counterfactual to Maranhão: Piauí and Parallel Trends</h3>
+            <p>The visual analysis reveals a robust Parallel Trends alignment prior to 2016. However, the 'Null Result' after the policy shock suggests structural resistance.</p>
             <div id="Chart1"></div>
+        </article>
+
+        <hr>
+
+        <article class="chart-container">
+            <h3>Chart 2: The Structural Trap: Sanitation vs. Poverty</h3>
+            
+            <p>
+                While Chart 1 showed stable trends, Chart 2 explains the <strong>structural divide</strong>. 
+                Using an <em>Ordinary Least Squares (OLS)</em> regression line, we observe a clear negative correlation between infrastructure and poverty. 
+                Maranhão (Blue) is clustered in a high-poverty, low-sanitation zone, while Piauí (Red) has transitioned to a higher baseline of services. 
+                This suggests that employment policies alone may face a 'bottleneck' if basic infrastructure is not improved simultaneously.
+            </p>
+
+            <div id="Chart2"></div>
         </article>
 
         <hr>
 
         <section id="Tools">
             <h2>Tools</h2>
-            <p>
-                Data was processed using <strong>Python (Pandas)</strong> for cleaning and restructuring. 
-                The visualisations are built with <strong>Vega-Lite</strong> to provide interactivity, while the project is hosted on <strong>GitHub Pages</strong> with version control managed through GitHub Desktop.
-            </p>
-        </section>
-
-        <section id="Conclusions">
-            <h2>Conclusions</h2>
-            <p>
-                Initial analysis of Chart 1 highlights significant heterogeneity in labor market recovery across Brazilian regions. 
-                Future steps involve correlating these rates with municipal poverty levels to validate the impact of employment on economic mobility.
-            </p>
+            <p>Data was processed using <strong>Python (Pandas)</strong> and visualisations built with <strong>Vega-Lite</strong>.</p>
         </section>
     </main>
 
     <script>
-        // Chart 1: Difference-in-Differences (DiD) Analysis
-let spec1 = {
-  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "title": {
-    "text": "The Impact of Employability Policies on Poverty",
-    "subtitle": "Difference-in-Differences: Maranhão (Treatment) vs Piauí (Control). Vertical line = 2016 Intervention.",
-    "anchor": "start",
-    "fontSize": 16
-  },
-  "data": { 
-      "url": "data/did_analysis_data.json" 
-  },
-  "width": 600,
-  "height": 400,
-  "layer": [
-    // Layer 1: The trend lines for both states
-    {
-      "mark": {"type": "line", "point": true, "strokeWidth": 3},
-      "encoding": {
-        "x": {
-            "field": "Year", 
-            "type": "ordinal", 
-            "title": "Year", 
-            "axis": {"labelAngle": 0, "grid": false}
-        },
-        "y": {
-            "field": "Poverty_Rate", 
-            "type": "quantitative", 
-            "title": "Poverty Rate (%)",
-            "scale": {"zero": false},
-            "axis": {"gridDash": [2,2]}
-        },
-        "color": {
-          "field": "State", 
-          "type": "nominal",
-          "scale": {"range": ["#003366", "#d62728"]}, // LSE Professional colors
-          "legend": {"orient": "top-right"}
-        }
-      }
-    },
-    // Layer 2: The vertical intervention line (Tufte-style annotation)
-    {
-      "mark": {"type": "rule", "color": "black", "strokeDash": [4,4], "size": 1.5},
-      "encoding": {
-        "x": {"datum": 2016}
-      }
-    }
-  ],
-  "config": {
-    "view": {"stroke": null},
-    "font": "Arial"
-  }
-};
+        // --- CHART 1 ---
+        let spec1 = {
+          "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+          "title": {
+            "text": "The Impact of Employability Policies on Poverty",
+            "subtitle": "Difference-in-Differences: Maranhão vs Piauí.",
+            "anchor": "start"
+          },
+          "data": { "url": "data/did_analysis_data.json" },
+          "width": 600,
+          "height": 400,
+          "layer": [
+            {
+              "mark": {"type": "line", "point": true, "strokeWidth": 3},
+              "encoding": {
+                "x": {"field": "Year", "type": "ordinal", "title": "Year"},
+                "y": {"field": "Poverty_Rate", "type": "quantitative", "scale": {"zero": false}},
+                "color": {"field": "State", "type": "nominal", "scale": {"range": ["#003366", "#d62728"]}}
+              }
+            },
+            {
+              "mark": {"type": "rule", "color": "black", "strokeDash": [4,4]},
+              "encoding": {"x": {"datum": 2016}}
+            }
+          ]
+        };
+        vegaEmbed('#Chart1', spec1).catch(console.error);
 
-// Render the chart
-vegaEmbed('#Chart1', spec1).catch(console.error);
+        // --- CHART 2 (With OLS Regression) ---
+        let spec2 = {
+          "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+          "title": {
+            "text": "Structural Barriers: Sanitation vs. Poverty",
+            "subtitle": "Linear regression (OLS) showing the correlation between infrastructure and poverty.",
+            "anchor": "start"
+          },
+          "data": { "url": "data/multidimensional_poverty.json" },
+          "width": 600,
+          "height": 400,
+          "layer": [
+            {
+              "mark": {"type": "point", "filled": true, "size": 100},
+              "encoding": {
+                "x": {"field": "Sanitation_Access", "type": "quantitative", "title": "Access to Sewage Network (%)", "scale": {"zero": false}},
+                "y": {"field": "Poverty_Rate", "type": "quantitative", "title": "Poverty Rate (%)", "scale": {"zero": false}},
+                "color": {"field": "State", "type": "nominal", "scale": {"range": ["#003366", "#d62728"]}},
+                "tooltip": [{"field": "State"}, {"field": "Year"}, {"field": "Poverty_Rate"}]
+              }
+            },
+            {
+              "mark": {"type": "line", "color": "gray", "strokeDash": [4,4]},
+              "transform": [{"regression": "Poverty_Rate", "on": "Sanitation_Access"}],
+              "encoding": {
+                "x": {"field": "Sanitation_Access", "type": "quantitative"},
+                "y": {"field": "Poverty_Rate", "type": "quantitative"}
+              }
+            }
+          ],
+          "config": {"view": {"stroke": null}, "font": "Arial"}
+        };
+        vegaEmbed('#Chart2', spec2).catch(console.error);
+
     </script>
-
-    <footer style="margin-top: 50px; font-size: 0.8em; color: gray;">
-        <p>Project for PP434: Automated Data Visualisation for Policymaking - LSE 2025/26</p>
-    </footer>
 </body>
 </html>
