@@ -1,0 +1,33 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "Men's Labor Force Participation",
+    "fontSize": 12
+  },
+  "width": "container",
+  "height": 250,
+  "data": {
+    "url": "https://raw.githubusercontent.com/gabrielcostapublicpolicy/gabrielcostapublicpolicy.github.io/main/cc6_data2.json"
+  },
+  "mark": {
+    "type": "line",
+    "strokeWidth": 2,
+    "color": "#3498db"
+  },
+  "encoding": {
+    "x": {
+      "field": "date",
+      "type": "temporal",
+      "title": null
+    },
+    "y": {
+      "field": "value",
+      "type": "quantitative",
+      "title": "Rate (%)"
+    },
+    "tooltip": [
+      {"field": "date", "type": "temporal", "format": "%Y-%m", "title": "Date"},
+      {"field": "value", "type": "quantitative", "format": ".1f", "title": "Rate (%)"}
+    ]
+  }
+}
