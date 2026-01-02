@@ -10,121 +10,179 @@
     <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
 
     <link rel="stylesheet" type="text/css" href="Example3.css"> 
+    <style>
+        body { font-family: 'Helvetica', sans-serif; max-width: 900px; margin: auto; padding: 20px; background-color: #fcfcfc; }
+        .btn-container { margin: 10px 0 20px 0; }
+        .data-btn {
+            background-color: #ffffff; border: 1px solid #003366; padding: 6px 12px;
+            text-decoration: none; color: #003366; font-size: 0.75em; border-radius: 4px; 
+            font-weight: bold; transition: 0.2s; margin-right: 5px;
+        }
+        .data-btn:hover { background-color: #003366; color: white; }
+        .chart-container { margin-bottom: 60px; background: white; padding: 25px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+        h2 { color: #003366; border-bottom: 2px solid #003366; display: inline-block; padding-bottom: 5px; }
+    </style>
 </head>
 
 <body>
-    <nav style="margin-bottom: 20px;">
-        <a href="Portfolio.html" style="text-decoration: none; font-weight: bold; color: #003366;">← Go to Portfolio</a>
-    </nav>
-
     <header>
-        <h1>Poverty and Labor Markets: Analyzing Employment as a Pathway to Economic Recovery in Brazil</h1>
-        <p style="font-style: italic;">By Gabriel Costa | LSE Master of Public Policy</p>
+        <h1>Structural Poverty and Labor Markets in Brazil</h1>
+        <p><em>By Gabriel Costa | LSE Master of Public Policy</em></p>
     </header>
     
     <main>
         <section id="Aims">
             <h2>Aims</h2>
-            <p>
-                This project investigates the relationship between labor market participation and poverty reduction in Brazilian state capitals. 
-                The central hypothesis is that employability serves as a primary driver for overcoming extreme poverty. 
-            </p>
+            <p>This project investigates the effectiveness of employability as a driver for poverty reduction. By analyzing Maranhão and Piauí, I test if labor market shocks can overcome deep structural deficits.</p>
+        </section>
+
+        <section id="Data">
+            <h2>Data</h2>
+            <p>Primary data is sourced from the <strong>IBGE SIDRA API</strong>. I utilize GeoJSON for spatial mapping and JSON time-series for policy evaluation.</p>
         </section>
 
         <hr>
-        
+
         <article class="chart-container">
-            <h3>Chart 1: Counterfactual to Maranhão: Piauí and Parallel Trends</h3>
-            <p>The visual analysis reveals a robust Parallel Trends alignment prior to 2016. However, the 'Null Result' after the policy shock suggests structural resistance.</p>
-            <div id="Chart1"></div>
+            <h3>Chart 1: Spatiotemporal Poverty Evolution</h3>
+            <div class="btn-container">
+                <a class="data-btn" href="data/brazil_poverty_geo_final.json" target="_blank">View Geo-Data</a>
+                <a class="data-btn" href="#" target="_blank">View Python Workflow</a>
+            </div>
+            <p>Move the slider below to observe how regional poverty evolved from 2016 to 2022. This visualization uses filtered Geoshape features to ensure seamless transitions.</p>
+            <div id="ChartMap"></div>
         </article>
 
-        <hr>
+        <article class="chart-container">
+            <h3>Chart 2: Policy Evaluation (Difference-in-Differences)</h3>
+            <div class="btn-container">
+                <a class="data-btn" href="data/did_analysis_data.json" target="_blank">View Data</a>
+            </div>
+            <p>Analysis of the 2016 policy shock. The parallel trends prior to intervention validate the counterfactual choice, while the post-2016 results show structural resistance.</p>
+            <div id="ChartDiD"></div>
+        </article>
 
         <article class="chart-container">
-            <h3>Chart 2: The Structural Trap: Sanitation vs. Poverty</h3>
-            
-            <p>
-                While Chart 1 showed stable trends, Chart 2 explains the <strong>structural divide</strong>. 
-                Using an <em>Ordinary Least Squares (OLS)</em> regression line, we observe a clear negative correlation between infrastructure and poverty. 
-                Maranhão (Blue) is clustered in a high-poverty, low-sanitation zone, while Piauí (Red) has transitioned to a higher baseline of services. 
-                This suggests that employment policies alone may face a 'bottleneck' if basic infrastructure is not improved simultaneously.
-            </p>
+            <h3>Chart 3: The Infrastructure Bottleneck (OLS Regression)</h3>
+            <div class="btn-container">
+                <a class="data-btn" href="data/multidimensional_poverty.json" target="_blank">View Data</a>
+            </div>
+            <p>This scatter plot reveals the negative correlation between sanitation access and poverty rates, highlighting a significant structural barrier.</p>
+            <div id="ChartOLS"></div>
+        </article>
 
-            <div id="Chart2"></div>
+        <article class="chart-container">
+            <h3>Chart 4: Advanced Interactive Exploration</h3>
+            <div class="btn-container">
+                <a class="data-btn" href="data/brazil_poverty_geo_final.json" target="_blank">View Data</a>
+            </div>
+            <p><strong>Interactivity:</strong> Select states in the legend to highlight their multidimensional trajectory over time.</p>
+            <div id="ChartInteractive"></div>
         </article>
 
         <hr>
 
         <section id="Tools">
             <h2>Tools</h2>
-            <p>Data was processed using <strong>Python (Pandas)</strong> and visualisations built with <strong>Vega-Lite</strong>.</p>
+            <p>Data processing performed in <strong>Python (Pandas)</strong>. Interactive visualizations built using <strong>Vega-Lite</strong> and hosted via <strong>GitHub Pages</strong>.</p>
+        </section>
+
+        <section id="Conclusions">
+            <h2>Conclusions</h2>
+            <p>Evidence suggests that isolated employability shocks are insufficient without aggressive investments in basic infrastructure and human capital.</p>
         </section>
     </main>
 
     <script>
-        // --- CHART 1 ---
-        let spec1 = {
+        const opt = {"mode": "vega-lite", "actions": false};
+
+        // 1. MAP (Fixed with filter inside mark)
+        const specMap = {
           "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-          "title": {
-            "text": "The Impact of Employability Policies on Poverty",
-            "subtitle": "Difference-in-Differences: Maranhão vs Piauí.",
-            "anchor": "start"
+          "width": 700, "height": 450,
+          "params": [{
+            "name": "YearSelect",
+            "value": 2022,
+            "bind": {"input": "range", "min": 2016, "max": 2022, "step": 1, "name": "Select Year: "}
+          }],
+          "data": {
+            "url": "data/brazil_poverty_geo_final.json",
+            "format": {"property": "features"}
           },
-          "data": { "url": "data/did_analysis_data.json" },
-          "width": 600,
-          "height": 400,
-          "layer": [
-            {
-              "mark": {"type": "line", "point": true, "strokeWidth": 3},
-              "encoding": {
-                "x": {"field": "Year", "type": "ordinal", "title": "Year"},
-                "y": {"field": "Poverty_Rate", "type": "quantitative", "scale": {"zero": false}},
-                "color": {"field": "State", "type": "nominal", "scale": {"range": ["#003366", "#d62728"]}}
-              }
+          "transform": [
+            {"filter": "datum.properties.Year == YearSelect"}
+          ],
+          "projection": {"type": "mercator"},
+          "mark": {"type": "geoshape", "stroke": "white"},
+          "encoding": {
+            "color": {
+              "field": "properties.Poverty_Rate",
+              "type": "quantitative",
+              "scale": {"scheme": "reds", "domain": [20, 60]},
+              "title": "Poverty Rate (%)"
             },
-            {
-              "mark": {"type": "rule", "color": "black", "strokeDash": [4,4]},
-              "encoding": {"x": {"datum": 2016}}
-            }
+            "tooltip": [
+              {"field": "properties.name", "title": "State"},
+              {"field": "properties.Poverty_Rate", "title": "Rate %", "format": ".1f"}
+            ]
+          }
+        };
+        vegaEmbed('#ChartMap', specMap, opt);
+
+        // 2. DiD Chart
+        const specDiD = {
+          "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+          "data": {"url": "data/did_analysis_data.json"},
+          "width": 600, "height": 300,
+          "layer": [
+            {"mark": {"type": "line", "point": true}, "encoding": {
+              "x": {"field": "Year", "type": "ordinal", "title": "Year"},
+              "y": {"field": "Poverty_Rate", "type": "quantitative", "title": "Poverty Rate (%)", "scale": {"zero": false}},
+              "color": {"field": "State", "type": "nominal", "scale": {"range": ["#003366", "#d62728"]}}
+            }},
+            {"mark": {"type": "rule", "color": "black", "strokeDash": [4,4]}, "encoding": {"x": {"datum": 2016}}}
           ]
         };
-        vegaEmbed('#Chart1', spec1).catch(console.error);
+        vegaEmbed('#ChartDiD', specDiD, opt);
 
-        // --- CHART 2 (With OLS Regression) ---
-        let spec2 = {
+        // 3. OLS Regression
+        const specOLS = {
           "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-          "title": {
-            "text": "Structural Barriers: Sanitation vs. Poverty",
-            "subtitle": "Linear regression (OLS) showing the correlation between infrastructure and poverty.",
-            "anchor": "start"
-          },
-          "data": { "url": "data/multidimensional_poverty.json" },
-          "width": 600,
-          "height": 400,
+          "data": {"url": "data/multidimensional_poverty.json"},
+          "width": 600, "height": 300,
           "layer": [
-            {
-              "mark": {"type": "point", "filled": true, "size": 100},
-              "encoding": {
-                "x": {"field": "Sanitation_Access", "type": "quantitative", "title": "Access to Sewage Network (%)", "scale": {"zero": false}},
-                "y": {"field": "Poverty_Rate", "type": "quantitative", "title": "Poverty Rate (%)", "scale": {"zero": false}},
-                "color": {"field": "State", "type": "nominal", "scale": {"range": ["#003366", "#d62728"]}},
-                "tooltip": [{"field": "State"}, {"field": "Year"}, {"field": "Poverty_Rate"}]
-              }
-            },
-            {
-              "mark": {"type": "line", "color": "gray", "strokeDash": [4,4]},
-              "transform": [{"regression": "Poverty_Rate", "on": "Sanitation_Access"}],
-              "encoding": {
-                "x": {"field": "Sanitation_Access", "type": "quantitative"},
-                "y": {"field": "Poverty_Rate", "type": "quantitative"}
-              }
-            }
-          ],
-          "config": {"view": {"stroke": null}, "font": "Arial"}
+            {"mark": "point", "encoding": {
+              "x": {"field": "Sanitation_Access", "type": "quantitative", "title": "Sanitation (%)"},
+              "y": {"field": "Poverty_Rate", "type": "quantitative", "title": "Poverty (%)"},
+              "color": {"field": "State", "type": "nominal"}
+            }},
+            {"mark": {"type": "line", "color": "gray", "strokeDash": [4,4]}, "transform": [{"regression": "Poverty_Rate", "on": "Sanitation_Access"}], "encoding": {
+              "x": {"field": "Sanitation_Access", "type": "quantitative"},
+              "y": {"field": "Poverty_Rate", "type": "quantitative"}
+            }}
+          ]
         };
-        vegaEmbed('#Chart2', spec2).catch(console.error);
+        vegaEmbed('#ChartOLS', specOLS, opt);
 
+        // 4. Interactive Bubble
+        const specInteractive = {
+          "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+          "data": {"url": "data/brazil_poverty_geo_final.json"},
+          "width": 600, "height": 350,
+          "params": [{
+            "name": "stateClick",
+            "select": {"type": "point", "fields": ["properties.name"]},
+            "bind": "legend"
+          }],
+          "mark": {"type": "circle", "size": 150, "filled": true},
+          "encoding": {
+            "x": {"field": "properties.Poverty_Rate", "type": "quantitative", "title": "Poverty (%)"},
+            "y": {"field": "properties.Year", "type": "quantitative", "title": "Year", "scale": {"zero": false}},
+            "color": {"field": "properties.name", "type": "nominal", "title": "State"},
+            "opacity": {"condition": {"param": "stateClick", "value": 1}, "value": 0.1}
+          }
+        };
+        vegaEmbed('#ChartInteractive', specInteractive, opt);
     </script>
 </body>
 </html>
