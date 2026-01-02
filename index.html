@@ -44,8 +44,12 @@
         <hr>
         
         <article class="chart-container">
-            <h3>Chart 1: Quarterly Unemployment Rates in Brazilian State Capitals</h3>
-            <p>This interactive chart shows the variation in unemployment across major cities between 2020 and 2024. Use the tooltip to see specific values.</p>
+            <h3>Chart 1: Countercatual to Maranhão: Piauí and the parallel trends</h3>
+            <p>The visual analysis of the Difference-in-Differences (DiD) framework reveals a robust Parallel Trends alignment between Maranhão (Treatment) and Piauí (Control) prior to 2016. This validates Piauí as a suitable counterfactual, as both states react similarly to macroeconomic shocks.
+
+The 'policy shock' marked in 2016 corresponds to the full implementation year of the 'Plano Mais IDH' (Decree 30.612/2015) in Maranhão. This program aimed to reduce extreme poverty through integrated actions in health, education, and income generation, such as the 'Mais Renda' employability scheme. However, the data shows no significant divergence in poverty rates between the two states following the intervention.
+
+This 'Null Result' suggests that the structural nature of poverty in Maranhão remains resistant to isolated employability shocks, potentially requiring a longer time-horizon or more intensive capital investment to break the historical parity with Piauí</p>
             <div id="Chart1"></div>
         </article>
 
@@ -69,77 +73,62 @@
     </main>
 
     <script>
-        // Chart 1 Specification: Unemployment in Capitals
-        let spec1 = {
-          "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-          "description": "Unemployment rate over time in Brazilian capitals with dropdown filter.",
-          "data": { 
-              "url": "data/unemployment_cleaned.json" 
-          },
-          "width": 600, // Largura fixa para melhor resolução
-          "height": 400,
-          "padding": 5,
-          "params": [
-            {
-              "name": "citySelect",
-              "select": {"type": "point", "fields": ["City"]},
-              "bind": {
-                "input": "select",
-                "options": [
-                  null, "Aracaju", "Belém", "Belo Horizonte", "Boa Vista", "Campo Grande", 
-                  "Cuiabá", "Curitiba", "Florianópolis", "Fortaleza", "Goiânia", "João Pessoa", 
-                  "Macapá", "Maceió", "Manaus", "Natal", "Palmas", "Porto Alegre", "Porto Velho", 
-                  "Recife", "Rio Branco", "Rio de Janeiro", "Salvador", "São Luís", "São Paulo", 
-                  "Teresina", "Vitória"
-                ],
-                "labels": ["Show All Capitals", "Aracaju", "Belém", "Belo Horizonte", "Boa Vista", "Campo Grande", "Cuiabá", "Curitiba", "Florianópolis", "Fortaleza", "Goiânia", "João Pessoa", "Macapá", "Maceió", "Manaus", "Natal", "Palmas", "Porto Alegre", "Porto Velho", "Recife", "Rio Branco", "Rio de Janeiro", "Salvador", "São Luís", "São Paulo", "Teresina", "Vitória"],
-                "name": "Select City: "
-              }
-            }
-          ],
-          "transform": [
-            {"filter": {"param": "citySelect"}}
-          ],
-          "mark": {
-              "type": "line",
-              "point": {"size": 50},
-              "strokeWidth": 3,
-              "interpolate": "monotone" // Suaviza a linha para melhor estética (Tufte-friendly)
-          },
-          "encoding": {
-            "x": { 
-                "field": "Quarter", 
-                "type": "nominal", 
-                "title": "Quarterly Period", 
-                "axis": {"labelAngle": -45, "grid": false} 
-            },
-            "y": { 
-                "field": "Unemployment_Rate", 
-                "type": "quantitative", 
-                "title": "Unemployment Rate (%)",
-                "scale": {"zero": false},
-                "axis": {"grid": true, "gridDash": [2,2]}
-            },
-            "color": { 
-                "field": "City", 
-                "type": "nominal",
-                "legend": {"orient": "right", "title": "Capitals"},
-                "scale": {"scheme": "tableau20"} // Cores mais profissionais e distintas
-            },
-            "tooltip": [
-              {"field": "City", "type": "nominal"},
-              {"field": "Quarter", "type": "nominal"},
-              {"field": "Unemployment_Rate", "type": "quantitative", "format": ".1f"}
-            ]
-          },
-          "config": {
-            "view": {"stroke": "transparent"},
-            "font": "Arial" // Mantendo a sobriedade
-          }
-        };
+        // Chart 1: Difference-in-Differences (DiD) Analysis
+let spec1 = {
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "The Impact of Employability Policies on Poverty",
+    "subtitle": "Difference-in-Differences: Maranhão (Treatment) vs Piauí (Control). Vertical line = 2016 Intervention.",
+    "anchor": "start",
+    "fontSize": 16
+  },
+  "data": { 
+      "url": "data/did_analysis_data.json" 
+  },
+  "width": 600,
+  "height": 400,
+  "layer": [
+    // Layer 1: The trend lines for both states
+    {
+      "mark": {"type": "line", "point": true, "strokeWidth": 3},
+      "encoding": {
+        "x": {
+            "field": "Year", 
+            "type": "ordinal", 
+            "title": "Year", 
+            "axis": {"labelAngle": 0, "grid": false}
+        },
+        "y": {
+            "field": "Poverty_Rate", 
+            "type": "quantitative", 
+            "title": "Poverty Rate (%)",
+            "scale": {"zero": false},
+            "axis": {"gridDash": [2,2]}
+        },
+        "color": {
+          "field": "State", 
+          "type": "nominal",
+          "scale": {"range": ["#003366", "#d62728"]}, // LSE Professional colors
+          "legend": {"orient": "top-right"}
+        }
+      }
+    },
+    // Layer 2: The vertical intervention line (Tufte-style annotation)
+    {
+      "mark": {"type": "rule", "color": "black", "strokeDash": [4,4], "size": 1.5},
+      "encoding": {
+        "x": {"datum": 2016}
+      }
+    }
+  ],
+  "config": {
+    "view": {"stroke": null},
+    "font": "Arial"
+  }
+};
 
-        // Render the chart in the div with id 'Chart1'
-        vegaEmbed('#Chart1', spec1).catch(console.error);
+// Render the chart
+vegaEmbed('#Chart1', spec1).catch(console.error);
     </script>
 
     <footer style="margin-top: 50px; font-size: 0.8em; color: gray;">
