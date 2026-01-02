@@ -1,1 +1,149 @@
-<h1>In progress</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PP434 Project - Gabriel Costa</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+
+    <link rel="stylesheet" type="text/css" href="Example3.css"> 
+</head>
+
+<body>
+    <nav style="margin-bottom: 20px;">
+        <a href="Portfolio.html" style="text-decoration: none; font-weight: bold; color: #003366;">← Go to Portfolio</a>
+    </nav>
+
+    <header>
+        <h1>Poverty and Labor Markets: Analyzing Employment as a Pathway to Economic Recovery in Brazil</h1>
+        <p style="font-style: italic;">By Gabriel Costa | LSE Master of Public Policy</p>
+    </header>
+    
+    <main>
+        <section id="Aims">
+            <h2>Aims</h2>
+            <p>
+                This project investigates the relationship between labor market participation and poverty reduction in Brazilian state capitals. 
+                The central hypothesis is that employability serves as a primary driver for overcoming extreme poverty. 
+                By analyzing quarterly unemployment data alongside poverty indicators, I aim to test if regions with more robust job growth demonstrate a faster transition out of poverty, providing evidence for targeted employability policies.
+            </p>
+        </section>
+
+        <section id="Data">
+            <h2>Data</h2>
+            <p>
+                The primary dataset is retrieved programmatically from the <strong>IBGE SIDRA API</strong> (Table 4099), focusing on the PNAD Contínua indicators. 
+                The automation process, developed in Python via Google Colab, ensures the pipeline is replicable. 
+                A significant challenge was the data transformation (Wrangling) from a wide format to a long format, making it suitable for time-series visualization.
+            </p>
+        </section>
+
+        <hr>
+        
+        <article class="chart-container">
+            <h3>Chart 1: Quarterly Unemployment Rates in Brazilian State Capitals</h3>
+            <p>This interactive chart shows the variation in unemployment across major cities between 2020 and 2024. Use the tooltip to see specific values.</p>
+            <div id="Chart1"></div>
+        </article>
+
+        <hr>
+
+        <section id="Tools">
+            <h2>Tools</h2>
+            <p>
+                Data was processed using <strong>Python (Pandas)</strong> for cleaning and restructuring. 
+                The visualisations are built with <strong>Vega-Lite</strong> to provide interactivity, while the project is hosted on <strong>GitHub Pages</strong> with version control managed through GitHub Desktop.
+            </p>
+        </section>
+
+        <section id="Conclusions">
+            <h2>Conclusions</h2>
+            <p>
+                Initial analysis of Chart 1 highlights significant heterogeneity in labor market recovery across Brazilian regions. 
+                Future steps involve correlating these rates with municipal poverty levels to validate the impact of employment on economic mobility.
+            </p>
+        </section>
+    </main>
+
+    <script>
+        // Chart 1 Specification: Unemployment in Capitals
+        let spec1 = {
+          "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+          "description": "Unemployment rate over time in Brazilian capitals with dropdown filter.",
+          "data": { 
+              "url": "data/unemployment_cleaned.json" 
+          },
+          "width": 600, // Largura fixa para melhor resolução
+          "height": 400,
+          "padding": 5,
+          "params": [
+            {
+              "name": "citySelect",
+              "select": {"type": "point", "fields": ["City"]},
+              "bind": {
+                "input": "select",
+                "options": [
+                  null, "Aracaju", "Belém", "Belo Horizonte", "Boa Vista", "Campo Grande", 
+                  "Cuiabá", "Curitiba", "Florianópolis", "Fortaleza", "Goiânia", "João Pessoa", 
+                  "Macapá", "Maceió", "Manaus", "Natal", "Palmas", "Porto Alegre", "Porto Velho", 
+                  "Recife", "Rio Branco", "Rio de Janeiro", "Salvador", "São Luís", "São Paulo", 
+                  "Teresina", "Vitória"
+                ],
+                "labels": ["Show All Capitals", "Aracaju", "Belém", "Belo Horizonte", "Boa Vista", "Campo Grande", "Cuiabá", "Curitiba", "Florianópolis", "Fortaleza", "Goiânia", "João Pessoa", "Macapá", "Maceió", "Manaus", "Natal", "Palmas", "Porto Alegre", "Porto Velho", "Recife", "Rio Branco", "Rio de Janeiro", "Salvador", "São Luís", "São Paulo", "Teresina", "Vitória"],
+                "name": "Select City: "
+              }
+            }
+          ],
+          "transform": [
+            {"filter": {"param": "citySelect"}}
+          ],
+          "mark": {
+              "type": "line",
+              "point": {"size": 50},
+              "strokeWidth": 3,
+              "interpolate": "monotone" // Suaviza a linha para melhor estética (Tufte-friendly)
+          },
+          "encoding": {
+            "x": { 
+                "field": "Quarter", 
+                "type": "nominal", 
+                "title": "Quarterly Period", 
+                "axis": {"labelAngle": -45, "grid": false} 
+            },
+            "y": { 
+                "field": "Unemployment_Rate", 
+                "type": "quantitative", 
+                "title": "Unemployment Rate (%)",
+                "scale": {"zero": false},
+                "axis": {"grid": true, "gridDash": [2,2]}
+            },
+            "color": { 
+                "field": "City", 
+                "type": "nominal",
+                "legend": {"orient": "right", "title": "Capitals"},
+                "scale": {"scheme": "tableau20"} // Cores mais profissionais e distintas
+            },
+            "tooltip": [
+              {"field": "City", "type": "nominal"},
+              {"field": "Quarter", "type": "nominal"},
+              {"field": "Unemployment_Rate", "type": "quantitative", "format": ".1f"}
+            ]
+          },
+          "config": {
+            "view": {"stroke": "transparent"},
+            "font": "Arial" // Mantendo a sobriedade
+          }
+        };
+
+        // Render the chart in the div with id 'Chart1'
+        vegaEmbed('#Chart1', spec1).catch(console.error);
+    </script>
+
+    <footer style="margin-top: 50px; font-size: 0.8em; color: gray;">
+        <p>Project for PP434: Automated Data Visualisation for Policymaking - LSE 2025/26</p>
+    </footer>
+</body>
+</html>
