@@ -33,11 +33,27 @@
     <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
 
     <style>
-        #chartGrid {
-            display: flex;
-        }
-        
-    </style>
+    /* Grid layout for the CC6 Dashboard */
+#dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Creates 3 columns */
+    gap: 20px;
+    margin-top: 20px;
+}
+
+/* Specific styling for dashboard charts to keep them smaller */
+#dashboard-grid div {
+    width: 100%;
+    height: 250px; 
+}
+
+/* Responsiveness: 1 column on mobile devices */
+@media (max-width: 600px) {
+    #dashboard-grid {
+        grid-template-columns: 1fr;
+    }
+}
+</style>
 </head>
 
 <body> 
@@ -115,14 +131,120 @@
     <figure id="Location7"></figure> 
 </section>
 <section>
+    <div class="chart-description">
     <h2>Section 5: Accessing Data (API & Scraper)</h2>
     <p>This chart is powered by a live connection to the FRED API, tracking US labor productivity.</p>
 
     <figure id="Location8"></figure>
-
+    
     <p><strong>API Description:</strong> I used the FRED API to fetch labor productivity data (ID: OPHNFB) in JSON format, linking my unique API key to ensure live data updates.</p>
+   
+    <p>This chart displays UK economic indicators scraped from Wikipedia and cleaned into tidy format. 
+    <a href="https://colab.research.google.com/drive/1JPPenrS-mmQw-bgzbDi614xgeyZ6gqBg" target="_blank">View Scraping Notebook</a>
+</p>
+
+<figure id="Location9"></figure>
+
+<p><strong>Scraping Process:</strong> Used BeautifulSoup to scrape data from Wikipedia, cleaned and normalized to tidy format. Source: Office for National Statistics (ONS). [cite: 80, 81, 85]</p>
+    
+    </div>
+</section>
+<!-- CC6: Loops and Dashboard Section -->
+<section>
+    <div class="chart-description">
+        <h2>CC6: Loops and Dashboards - Diversity & Productivity Metrics</h2>
+        <p>
+            This dashboard uses a Python loop to batch-download six economic time series 
+            from the FRED API, exploring workforce diversity and productivity trends in the US.
+        </p>
+        <p>
+            <strong>Data Source:</strong> Federal Reserve Economic Data (FRED API)<br>
+            <strong>Method:</strong> Python loop for batch download, JavaScript loop for embedding charts
+        </p>
+        <p>
+            <a href="https://colab.research.google.com/drive/1y_kuGMF1LlT5G05duMoRHjLDmXST4FTB" target="_blank">View Python Loop Notebook</a>
+        </p>
+    </div>
+
+    <!-- Grid container for 6 charts (2 rows x 3 columns) -->
+    <div id="dashboard-grid">
+        <div id="chart1"></div>
+        <div id="chart2"></div>
+        <div id="chart3"></div>
+        <div id="chart4"></div>
+        <div id="chart5"></div>
+        <div id="chart6"></div>
+    </div>
+</section>
+<section>
+    <div class="chart-description">
+        <h2>CC7: Inequality Maps - Scotland and Wales</h2>
+        <p>
+            The first map is a <strong>coordinates map</strong> of Scotland showing income deprivation. 
+            The second is a <strong>cloropleth</strong> showing the distribution of social support hubs in Wales.
+        </p>
+    </div>
+    <div style="display: flex; justify-content: space-around;">
+        <figure id="Location10"></figure>
+        <figure id="Location11"></figure>
+    </div>
+</section>
+<section>
+    <div class="chart-description">
+        <h2>CC8: Big Data - Extracting a story from millions of prices</h2>
+        <p>
+            Using the AutoCPI dataset, I analyzed daily price fluctuations for essential goods. 
+            I processed millions of observations in Python, grouping them by weekly averages to 
+            visualize inflation trends without compromising website performance.
+        </p>
+    </div>
+    <figure id="Location12"></figure>
+    <figure id="Location13"></figure>
 </section>
 
+
+<!-- Add this CSS in your <head> section or in your CSS file -->
+<style>
+    #dashboard-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr); /* 3 columns */
+        gap: 20px;
+        margin: 20px 0;
+    }
+
+    #dashboard-grid div {
+        width: 100%;
+        min-height: 300px;
+    }
+
+    /* Responsive: 1 column on mobile */
+    @media (max-width: 768px) {
+        #dashboard-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>
+
+<!-- JavaScript Loop to embed charts (add to bottom of page, after other vegaEmbed calls) -->
+<script>
+    // CC6: JavaScript loop to embed the six dashboard charts
+    // This satisfies the 2nd point requirement (loop in JavaScript)
+    for (let i = 1; i <= 6; i++) {
+        vegaEmbed(`#chart${i}`, `cc6_series${i}.json`);
+    }
+</script>
+
+
+
+<section>
+  <div class="chart-description">
+    <h2>Task 8: Monthly Average Price and Inflation</h2>
+    <p>
+      This chart shows the monthly average price and the month-on-month inflation rate computed from the microdata.
+    </p>
+  </div>
+  <figure id="Location10"></figure>
+</section>
 
     <!-- Do you want to add more sections? -->
         <!-- Try copying pasting the section above -->
@@ -146,12 +268,16 @@
         vegaEmbed('#Location6', "wk3_gini brazil colombia.json") // We're using the vegaEmbed function to put a graph in the element with id figure_3
         vegaEmbed('#Location7', "wk4_inflation_corrected.json") // We're using the vegaEmbed function to put a graph in the element with id figure_3
         vegaEmbed('#Location8', "wk5_productivity_api.json")
+        vegaEmbed('#Location9', "wk5_scraped_data (2).json")
+       // CC6: JavaScript loop to embed the six dashboard charts (2nd point requirement)
+for (let i = 1; i <= 6; i++) {
+    // We use backticks (`) to dynamically create the ID and Filename
+    // This targets #chart1, #chart2, etc., using files cc6_series1.json, etc.
+    vegaEmbed(`#chart${i}`, `cc6_series${i}.json`);
+}
 
-        // Do you want to add more graphs?
-        // try defining a new variable for figure_3_spec, adding VegaEmbed for Location3, and adding a new section in the HTML
-        // e.g. 
-        // let figure_3_spec = ...
-        // vegaEmbed('#Location3', figure_3_spec)
+vegaEmbed('#Location10', "data/cc8_monthly_inflation_chart.json")
+
 
 
     </script>
