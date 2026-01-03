@@ -1,0 +1,13 @@
+[
+  {"Year":2012,"Poverty_Rate":20.4,"Informality_Rate":65.2,"Years_of_Study":6.5},
+  {"Year":2013,"Poverty_Rate":19.8,"Informality_Rate":64.8,"Years_of_Study":6.7},
+  {"Year":2014,"Poverty_Rate":19.1,"Informality_Rate":63.5,"Years_of_Study":6.9},
+  {"Year":2015,"Poverty_Rate":20.1,"Informality_Rate":64.2,"Years_of_Study":7.1},
+  {"Year":2016,"Poverty_Rate":21.5,"Informality_Rate":65.8,"Years_of_Study":7.3},
+  {"Year":2017,"Poverty_Rate":22.3,"Informality_Rate":66.4,"Years_of_Study":7.5},
+  {"Year":2018,"Poverty_Rate":22.1,"Informality_Rate":66.1,"Years_of_Study":7.7},
+  {"Year":2019,"Poverty_Rate":21.8,"Informality_Rate":65.9,"Years_of_Study":7.9},
+  {"Year":2020,"Poverty_Rate":23.1,"Informality_Rate":67.2,"Years_of_Study":8.0},
+  {"Year":2021,"Poverty_Rate":24.5,"Informality_Rate":68.5,"Years_of_Study":8.1},
+  {"Year":2022,"Poverty_Rate":21.2,"Informality_Rate":64.9,"Years_of_Study":8.4}
+]
