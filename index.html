@@ -57,14 +57,14 @@
 
 
         <article class="chart-container">
-            <h3>Chart 2: Policy Evaluation (Difference-in-Differences)</h3>
-            <div class="btn-container">
-                <a class="data-btn" href="data/did_analysis_data.json" target="_blank">View Data</a>
-            </div>
-            <p>Analysis of the 2016 policy shock. The parallel trends prior to intervention validate the counterfactual choice, while the post-2016 results show structural resistance.</p>
-            <div id="ChartBF_MA_BR"></div>
+  <h3>Chart 2: Bolsa Família monthly totals (Maranhão vs Brazil)</h3>
+  <div class="btn-container">
+    <a class="data-btn" href="data/charts/chart2_ma_vs_br_monthly_2014_2021.json" target="_blank">View data (JSON)</a>
+  </div>
+  <p>Monthly totals comparing Maranhão vs Brazil (2014 and 2021).</p>
+  <div id="ChartBF_MA_BR"></div>
+</article>
 
-        </article>
 
         <article class="chart-container">
             <h3>Chart 3: The Infrastructure Bottleneck (OLS Regression)</h3>
@@ -102,23 +102,6 @@
        vegaEmbed('#ChartBF_UF', 'data/charts/spec_chart1_bf_uf_2021.json', opt);
         vegaEmbed("#ChartBF_MA_BR", "data/charts/spec_chart2_ma_vs_br_2014_2021.json", { actions: false });
 
-
-
-        // 2. DiD Chart
-        const specDiD = {
-          "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-          "data": {"url": "data/did_analysis_data.json"},
-          "width": 600, "height": 300,
-          "layer": [
-            {"mark": {"type": "line", "point": true}, "encoding": {
-              "x": {"field": "Year", "type": "ordinal", "title": "Year"},
-              "y": {"field": "Poverty_Rate", "type": "quantitative", "title": "Poverty Rate (%)", "scale": {"zero": false}},
-              "color": {"field": "State", "type": "nominal", "scale": {"range": ["#003366", "#d62728"]}}
-            }},
-            {"mark": {"type": "rule", "color": "black", "strokeDash": [4,4]}, "encoding": {"x": {"datum": 2016}}}
-          ]
-        };
-        vegaEmbed('#ChartDiD', specDiD, opt);
 
         // 3. OLS Regression
         const specOLS = {
