@@ -1,0 +1,55 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Bolsa Família monthly totals: Maranhão vs Brazil (2014 and 2021).",
+  "data": { "url": "data/charts/chart2_ma_vs_br_monthly_2014_2021.json" },
+  "transform": [
+    { "filter": "datum.year == 2014 || datum.year == 2021" },
+    {
+      "fold": ["brazil_total", "ma_total"],
+      "as": ["series_raw", "value"]
+    },
+    {
+      "calculate": "datum.series_raw == 'brazil_total' ? 'Brazil' : 'Maranhão'",
+      "as": "series"
+    }
+  ],
+  "width": "container",
+  "height": 160,
+  "facet": {
+    "row": {
+      "field": "year",
+      "type": "ordinal",
+      "title": null,
+      "sort": ["2014", "2021"]
+    }
+  },
+  "spec": {
+    "mark": { "type": "line", "point": true },
+    "encoding": {
+      "x": {
+        "field": "month",
+        "type": "ordinal",
+        "title": null,
+        "axis": { "labelAngle": 0 }
+      },
+      "y": {
+        "field": "value",
+        "type": "quantitative",
+        "title": "Total payments (R$)",
+        "axis": { "format": "s" }
+      },
+      "color": { "field": "series", "type": "nominal", "title": null },
+      "tooltip": [
+        { "field": "year", "type": "ordinal", "title": "Year" },
+        { "field": "month_label", "type": "nominal", "title": "Month" },
+        { "field": "series", "type": "nominal" },
+        { "field": "value", "type": "quantitative", "title": "Payments (R$)", "format": ",.0f" },
+        { "field": "ma_share", "type": "quantitative", "title": "MA share", "format": ".2%" }
+      ]
+    }
+  },
+  "config": {
+    "view": { "stroke": null },
+    "axis": { "grid": true }
+  }
+}

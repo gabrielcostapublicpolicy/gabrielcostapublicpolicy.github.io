@@ -62,7 +62,8 @@
                 <a class="data-btn" href="data/did_analysis_data.json" target="_blank">View Data</a>
             </div>
             <p>Analysis of the 2016 policy shock. The parallel trends prior to intervention validate the counterfactual choice, while the post-2016 results show structural resistance.</p>
-            <div id="ChartDiD"></div>
+            <div id="ChartBF_MA_BR"></div>
+
         </article>
 
         <article class="chart-container">
@@ -99,6 +100,7 @@
     <script>
        const opt = {mode:'vega-lite', actions:false};
        vegaEmbed('#ChartBF_UF', 'data/charts/spec_chart1_bf_uf_2021.json', opt);
+        vegaEmbed("#ChartBF_MA_BR", "data/charts/spec_chart2_ma_vs_br_2014_2021.json", { actions: false });
 
 
 
