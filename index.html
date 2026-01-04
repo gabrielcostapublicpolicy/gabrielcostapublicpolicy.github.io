@@ -43,15 +43,18 @@
 
         <hr>
 
-        <article class="chart-container">
-            <h3>Chart 1: Spatiotemporal Poverty Evolution</h3>
-            <div class="btn-container">
-                <a class="data-btn" href="data/brazil_poverty_geo_final.json" target="_blank">View Geo-Data</a>
-                <a class="data-btn" href="#" target="_blank">View Python Workflow</a>
-            </div>
-            <p>Move the slider below to observe how regional poverty evolved from 2016 to 2022. This visualization uses filtered Geoshape features to ensure seamless transitions.</p>
-            <div id="ChartMap"></div>
-        </article>
+       <article class="chart-container">
+  <h3>Chart 1: Bolsa Família Payments by State (Jan–Nov 2021)</h3>
+  <div class="btn-container">
+    <a class="data-btn" href="data/charts/chart1_uf_total_2021.json" target="_blank">View data (JSON)</a>
+  </div>
+  <p>
+    A ranked comparison of total Bolsa Família payments across Brazilian states.
+    Maranhão is highlighted to keep focus on the project’s core region.
+  </p>
+  <div id="ChartBF_UF"></div>
+</article>
+
 
         <article class="chart-container">
             <h3>Chart 2: Policy Evaluation (Difference-in-Differences)</h3>
@@ -94,40 +97,9 @@
     </main>
 
     <script>
-        const opt = {"mode": "vega-lite", "actions": false};
+       vegaEmbed('#ChartBF_UF', 'data/charts/spec_chart1_bf_uf_2021.json', {mode:'vega-lite', actions:false});
 
-        // 1. MAP (Fixed with filter inside mark)
-        const specMap = {
-          "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-          "width": 700, "height": 450,
-          "params": [{
-            "name": "YearSelect",
-            "value": 2022,
-            "bind": {"input": "range", "min": 2016, "max": 2022, "step": 1, "name": "Select Year: "}
-          }],
-          "data": {
-            "url": "data/brazil_poverty_geo_final.json",
-            "format": {"property": "features"}
-          },
-          "transform": [
-            {"filter": "datum.properties.Year == YearSelect"}
-          ],
-          "projection": {"type": "mercator"},
-          "mark": {"type": "geoshape", "stroke": "white"},
-          "encoding": {
-            "color": {
-              "field": "properties.Poverty_Rate",
-              "type": "quantitative",
-              "scale": {"scheme": "reds", "domain": [20, 60]},
-              "title": "Poverty Rate (%)"
-            },
-            "tooltip": [
-              {"field": "properties.name", "title": "State"},
-              {"field": "properties.Poverty_Rate", "title": "Rate %", "format": ".1f"}
-            ]
-          }
-        };
-        vegaEmbed('#ChartMap', specMap, opt);
+
 
         // 2. DiD Chart
         const specDiD = {
