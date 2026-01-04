@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Chart 1 — Bolsa Família 2021 (UF)</title>
+
+  <!-- Vega stack (CDN) -->
+  <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+
+  <style>
+    body { font-family: system-ui, Arial, sans-serif; margin: 24px; }
+    #vis { max-width: 980px; }
+  </style>
+</head>
+<body>
+  <h1>Bolsa Família (jan–nov/2021): total pago por UF</h1>
+  <p style="max-width: 980px;">
+    Fonte: pagamentos do Bolsa Família agregados por UF (jan–nov/2021).
+    Valores nominais (R$).
+  </p>
+
+  <div id="vis"></div>
+
+  <script>
+    const dataUrl = "../data/charts/chart1_uf_total_2021.json";
+
+    const spec = {
+      "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+      "width": 900,
+      "height": 520,
+      "data": { "url": dataUrl },
+      "transform": [
+        { "calculate": "datum.total_pago_2021 / 1000000", "as": "total_milhoes" }
+      ],
+      "mark": { "type": "bar" },
+      "encoding": {
+        "y": {
+          "field": "UF",
+          "type": "nominal",
+          "sort": "-x",
+          "title": "UF"
+        },
+        "x": {
+          "field": "total_milhoes",
+          "type": "quantitative",
+          "title": "Total pago (R$ milhões)"
+        },
+        "tooltip": [
+          { "field": "UF", "type": "nominal", "title": "UF" },
+          { "field": "total_pago_2021", "type": "quantitative", "title": "Total (R$)", "format": ",.0f" },
+          { "field": "total_milhoes", "type": "quantitative", "title": "Total (R$ milhões)", "format": ",.2f" }
+        ]
+      },
+      "config": {
+        "axis": { "labelFontSize": 12, "titleFontSize": 13 },
+        "view": { "stroke": null }
+      }
+    };
+
+    vegaEmbed("#vis", spec, { actions: true });
+  </script>
+</body>
+</html>
