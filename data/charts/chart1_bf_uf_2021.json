@@ -1,0 +1,61 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Bolsa Família (Jan–Nov 2021): total paid by Brazilian state (UF). Maranhão highlighted.",
+  "width": 700,
+  "height": {"step": 18},
+  "data": {
+    "url": "https://gabrielcostapublicpolicy.github.io/data/charts/chart1_uf_total_2021.json"
+  },
+  "transform": [
+    {"calculate": "datum.total_pago_2021 / 1e9", "as": "total_brl_billion"},
+    {
+      "calculate": "datum.UF === 'MA' ? 'Maranhão (MA)' : 'Other states'",
+      "as": "group"
+    }
+  ],
+  "mark": {"type": "bar", "cornerRadiusEnd": 2},
+  "encoding": {
+    "y": {
+      "field": "UF",
+      "type": "nominal",
+      "sort": {
+        "field": "total_brl_billion",
+        "op": "sum",
+        "order": "descending"
+      },
+      "title": "State (UF)"
+    },
+    "x": {
+      "field": "total_brl_billion",
+      "type": "quantitative",
+      "title": "Total paid (R$ billions, nominal)",
+      "axis": {"format": ".2f"}
+    },
+    "color": {
+      "field": "group",
+      "type": "nominal",
+      "legend": {"title": null},
+      "scale": {"domain": ["Maranhão (MA)", "Other states"]}
+    },
+    "tooltip": [
+      {"field": "UF", "type": "nominal", "title": "UF"},
+      {
+        "field": "total_brl_billion",
+        "type": "quantitative",
+        "title": "Total (R$ bn)",
+        "format": ".2f"
+      },
+      {
+        "field": "total_pago_2021",
+        "type": "quantitative",
+        "title": "Total (R$)",
+        "format": ",.0f"
+      }
+    ]
+  },
+  "config": {
+    "view": {"stroke": null},
+    "axis": {"labelFontSize": 12, "titleFontSize": 13},
+    "legend": {"labelFontSize": 12}
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Bolsa Família (Jan–Nov 2021): total paid by Brazilian state (UF). Maranhão highlighted.",
+  "data": {"url": "data/charts/chart1_uf_total_2021.json"},
+  "width": 700,
+  "height": {"step": 18},
+  "mark": {"type": "bar", "cornerRadiusEnd": 2},
+  "encoding": {
+    "y": {
+      "field": "UF",
+      "type": "nominal",
+      "sort": {"field": "total_pago_2021", "op": "sum", "order": "descending"},
+      "title": "State (UF)"
+    },
+    "x": {
+      "field": "total_pago_2021",
+      "type": "quantitative",
+      "title": "Total paid (R$ billions, nominal)",
+      "axis": {"format": ".2f"}
+    },
+    "color": {
+      "field": "highlight",
+      "type": "nominal",
+      "scale": {"domain": ["Maranhão", "Other"], "range": ["#003366", "#d3d3d3"]},
+      "legend": null
+    },
+    "tooltip": [
+      {"field": "UF", "type": "nominal", "title": "State"},
+      {"field": "total_pago_2021", "type": "quantitative", "title": "Total (R$)", "format": ",.0f"}
+    ]
+  }
+}
