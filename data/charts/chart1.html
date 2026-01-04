@@ -2,65 +2,88 @@
 <html lang="pt-br">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Chart 1 — Bolsa Família 2021 (UF)</title>
 
-  <!-- Vega stack (CDN) -->
+  <!-- Vega / Vega-Lite / Vega-Embed -->
   <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
   <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
   <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
 
   <style>
-    body { font-family: system-ui, Arial, sans-serif; margin: 24px; }
+    body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; margin: 24px; }
+    h1 { margin: 0 0 6px 0; font-size: 32px; }
+    p  { margin: 0 0 18px 0; color: #333; }
     #vis { max-width: 980px; }
   </style>
 </head>
+
 <body>
   <h1>Bolsa Família (jan–nov/2021): total pago por UF</h1>
-  <p style="max-width: 980px;">
-    Fonte: pagamentos do Bolsa Família agregados por UF (jan–nov/2021).
-    Valores nominais (R$).
-  </p>
+  <p>Fonte: pagamentos do Bolsa Família agregados por UF (jan–nov/2021). Valores nominais (R$).</p>
 
   <div id="vis"></div>
 
   <script>
-    const dataUrl = "../data/charts/chart1_uf_total_2021.json";
-
+    // SPEC Vega-Lite
     const spec = {
-      "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-      "width": 900,
-      "height": 520,
-      "data": { "url": dataUrl },
-      "transform": [
-        { "calculate": "datum.total_pago_2021 / 1000000", "as": "total_milhoes" }
-      ],
-      "mark": { "type": "bar" },
-      "encoding": {
-        "y": {
-          "field": "UF",
-          "type": "nominal",
-          "sort": "-x",
-          "title": "UF"
-        },
-        "x": {
-          "field": "total_milhoes",
-          "type": "quantitative",
-          "title": "Total pago (R$ milhões)"
-        },
-        "tooltip": [
-          { "field": "UF", "type": "nominal", "title": "UF" },
-          { "field": "total_pago_2021", "type": "quantitative", "title": "Total (R$)", "format": ",.0f" },
-          { "field": "total_milhoes", "type": "quantitative", "title": "Total (R$ milhões)", "format": ",.2f" }
-        ]
+      $schema: "https://vega.github.io/schema/vega-lite/v5.json",
+      width: 900,
+      height: 520,
+
+      data: {
+        // ✅ usa o caminho absoluto que você testou que abre no navegador
+        url: "/data/charts/chart1_uf_total_2021.json"
       },
-      "config": {
-        "axis": { "labelFontSize": 12, "titleFontSize": 13 },
-        "view": { "stroke": null }
+
+      transform: [
+        // garante que é número (mesmo se vier como texto)
+        { calculate: "toNumber(datum.total_pago_2021)", as: "total_pago_2021_num" },
+        // transforma em milhões
+        { calculate: "datum.total_pago_2021_num / 1000000", as: "total_milhoes" }
+      ],
+
+      mark: { type: "bar" },
+
+      encoding: {
+        y: {
+          field: "UF",
+          type: "nominal",
+          sort: "-x",
+          axis: { title: "UF" }
+        },
+        x: {
+          field: "total_milhoes",
+          type: "quantitative",
+          axis: { title: "Total pago (R$ milhões)" }
+        },
+        tooltip: [
+          { field: "UF", type: "nominal", title: "UF" },
+          { field: "total_milhoes", type: "quantitative", title: "Total (R$ mi)", format: ",.0f" },
+          { field: "total_pago_2021_num", type: "quantitative", title: "Total (R$)", format: ",.0f" }
+        ],
+        color: {
+          field: "highlight",
+          type: "nominal",
+          legend: null,
+          scale: {
+            domain: ["Maranhão", "Other"],
+            range: ["#d62728", "#4c78a8"]
+          }
+        }
+      },
+
+      config: {
+        view: { stroke: null }
       }
     };
 
-    vegaEmbed("#vis", spec, { actions: true });
+    vegaEmbed("#vis", spec, { actions: true })
+      .catch(err => {
+        console.error(err);
+        document.getElementById("vis").innerHTML =
+          "<p style='color:red'><b>Erro ao renderizar o gráfico.</b><br/>Abra o Console (F12) e veja a mensagem.</p>";
+      });
   </script>
 </body>
 </html>
