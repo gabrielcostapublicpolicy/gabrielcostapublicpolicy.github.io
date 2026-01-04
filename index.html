@@ -65,15 +65,46 @@
   <div id="ChartBF_MA_BR"></div>
 </article>
 
+<article class="chart-container">
+  <h3>Chart 3: Bolsa Família payments by municipality (Maranhão, 2021)</h3>
 
-        <article class="chart-container">
-            <h3>Chart 3: The Infrastructure Bottleneck (OLS Regression)</h3>
-            <div class="btn-container">
-                <a class="data-btn" href="data/multidimensional_poverty.json" target="_blank">View Data</a>
-            </div>
-            <p>This scatter plot reveals the negative correlation between sanitation access and poverty rates, highlighting a significant structural barrier.</p>
-            <div id="ChartOLS"></div>
-        </article>
+  <div class="btn-container">
+    <a class="data-btn"
+       href="data/charts/chart3_ma_municipios_total_2021_jan_nov.json"
+       target="_blank">
+       View data (JSON)
+    </a>
+  </div>
+
+  <p>
+    This chart shows the concentration of Bolsa Família payments across municipalities in Maranhão
+    between January and November 2021. The distribution highlights the dominance of large urban
+    centers such as São Luís, while also revealing the long tail of smaller municipalities that
+    collectively absorb a substantial share of transfers.
+  </p>
+
+  <div id="ChartBF_MA_MUN"></div>
+</article>
+<article class="chart-container">
+  <h3>Chart 3b: Concentration of Bolsa Família payments (Pareto curve)</h3>
+
+  <div class="btn-container">
+    <a class="data-btn"
+       href="data/charts/chart3_ma_municipios_total_2021_jan_nov.json"
+       target="_blank">
+       View data (JSON)
+    </a>
+  </div>
+
+  <p>
+    This chart shows the cumulative distribution of Bolsa Família payments across
+    municipalities in Maranhão (Jan–Nov 2021), highlighting how a small number of
+    municipalities concentrate a large share of total transfers.
+  </p>
+
+  <div id="ChartBF_MA_PARETO"></div>
+</article>
+
 
         <article class="chart-container">
             <h3>Chart 4: Advanced Interactive Exploration</h3>
@@ -101,26 +132,14 @@
        const opt = {mode:'vega-lite', actions:false};
        vegaEmbed('#ChartBF_UF', 'data/charts/spec_chart1_bf_uf_2021.json', opt);
         vegaEmbed("#ChartBF_MA_BR", "data/charts/spec_chart2_ma_vs_br_2014_2021.json", { actions: false });
+        vegaEmbed("#ChartBF_MA_MUN", "data/charts/spec_chart3_ma_municipios_2021.json", { actions: false });
+       vegaEmbed(
+  "#ChartBF_MA_PARETO",
+  "data/charts/spec_chart3b_ma_pareto_2021.json",
+  { actions: false }
+);
+vegaEmbed("#ChartBF_MA_MUN", "data/charts/spec_chart3_ma_municipios_2021.json", { actions: false });
 
-
-        // 3. OLS Regression
-        const specOLS = {
-          "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-          "data": {"url": "data/multidimensional_poverty.json"},
-          "width": 600, "height": 300,
-          "layer": [
-            {"mark": "point", "encoding": {
-              "x": {"field": "Sanitation_Access", "type": "quantitative", "title": "Sanitation (%)"},
-              "y": {"field": "Poverty_Rate", "type": "quantitative", "title": "Poverty (%)"},
-              "color": {"field": "State", "type": "nominal"}
-            }},
-            {"mark": {"type": "line", "color": "gray", "strokeDash": [4,4]}, "transform": [{"regression": "Poverty_Rate", "on": "Sanitation_Access"}], "encoding": {
-              "x": {"field": "Sanitation_Access", "type": "quantitative"},
-              "y": {"field": "Poverty_Rate", "type": "quantitative"}
-            }}
-          ]
-        };
-        vegaEmbed('#ChartOLS', specOLS, opt);
 
         // 4. Interactive Bubble
         const specInteractive = {

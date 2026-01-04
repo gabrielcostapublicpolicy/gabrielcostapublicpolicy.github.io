@@ -1,0 +1,25 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Concentration of Bolsa Família payments across municipalities in Maranhão (Pareto curve, Jan–Nov 2021).",
+  "data": { "url": "data/charts/chart3_ma_municipios_total_2021_jan_nov.json" },
+  "transform": [
+    { "sort": [{ "field": "total_paid", "order": "descending" }] },
+    { "window": [{ "op": "sum", "field": "total_paid", "as": "cum_paid" }], "frame": [null, 0] },
+    { "joinaggregate": [{ "op": "sum", "field": "total_paid", "as": "total_all" }] },
+    { "calculate": "datum.cum_paid / datum.total_all", "as": "cum_share" },
+    { "window": [{ "op": "rank", "as": "rank" }] }
+  ],
+  "width": 500,
+  "height": 260,
+  "mark": { "type": "line", "point": false },
+  "encoding": {
+    "x": { "field": "rank", "type": "quantitative", "title": "Municipalities (ranked by total payments)" },
+    "y": { "field": "cum_share", "type": "quantitative", "title": "Cumulative share of payments", "axis": { "format": ".0%" } },
+    "tooltip": [
+      { "field": "rank", "type": "quantitative", "title": "Rank" },
+      { "field": "municipio_name", "type": "nominal", "title": "Municipality" },
+      { "field": "cum_share", "type": "quantitative", "title": "Cumulative share", "format": ".1%" }
+    ]
+  },
+  "config": { "view": { "stroke": null } }
+}

@@ -1,0 +1,21 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Top municipalities in Maranhão by Bolsa Família payments (Jan–Nov 2021).",
+  "data": { "url": "data/charts/chart3_ma_municipios_total_2021_jan_nov.json" },
+  "transform": [
+    { "window": [{ "op": "rank", "as": "rank" }], "sort": [{ "field": "total_paid", "order": "descending" }] },
+    { "filter": "datum.rank <= 30" }
+  ],
+  "width": "400",
+  "height": 420,
+  "mark": "bar",
+  "encoding": {
+    "y": { "field": "municipio_name", "type": "nominal", "sort": "-x", "title": null },
+    "x": { "field": "total_paid", "type": "quantitative", "title": "Total payments (R$)", "axis": { "format": "s" } },
+    "tooltip": [
+      { "field": "municipio_name", "type": "nominal", "title": "Municipality" },
+      { "field": "total_paid", "type": "quantitative", "title": "Payments (R$)", "format": ",.0f" }
+    ]
+  },
+  "config": { "view": { "stroke": null } }
+}
