@@ -1,0 +1,394 @@
+[
+  {
+    "UF": "BA",
+    "State": "Bahia",
+    "bf_total": 3857694690.0,
+    "dimension": "Sanitation access (%)",
+    "value": 71.7310858905
+  },
+  {
+    "UF": "BA",
+    "State": "Bahia",
+    "bf_total": 3857694690.0,
+    "dimension": "Unemployment (%)",
+    "value": 15.35
+  },
+  {
+    "UF": "SP",
+    "State": "São Paulo",
+    "bf_total": 3245965010.0,
+    "dimension": "Sanitation access (%)",
+    "value": 70.0
+  },
+  {
+    "UF": "SP",
+    "State": "São Paulo",
+    "bf_total": 3245965010.0,
+    "dimension": "Unemployment (%)",
+    "value": 9.1
+  },
+  {
+    "UF": "PE",
+    "State": "Pernambuco",
+    "bf_total": 2424878812.0,
+    "dimension": "Sanitation access (%)",
+    "value": 70.0
+  },
+  {
+    "UF": "PE",
+    "State": "Pernambuco",
+    "bf_total": 2424878812.0,
+    "dimension": "Unemployment (%)",
+    "value": 14.25
+  },
+  {
+    "UF": "CE",
+    "State": "Ceará",
+    "bf_total": 2292064460.0,
+    "dimension": "Sanitation access (%)",
+    "value": 70.0
+  },
+  {
+    "UF": "CE",
+    "State": "Ceará",
+    "bf_total": 2292064460.0,
+    "dimension": "Unemployment (%)",
+    "value": 9.475
+  },
+  {
+    "UF": "MG",
+    "State": "Minas Gerais",
+    "bf_total": 2275529087.0,
+    "dimension": "Sanitation access (%)",
+    "value": 70.0
+  },
+  {
+    "UF": "MG",
+    "State": "Minas Gerais",
+    "bf_total": 2275529087.0,
+    "dimension": "Unemployment (%)",
+    "value": 7.175
+  },
+  {
+    "UF": "MA",
+    "State": "Maranhão",
+    "bf_total": 2267416485.0,
+    "dimension": "Sanitation access (%)",
+    "value": 48.4038530164
+  },
+  {
+    "UF": "MA",
+    "State": "Maranhão",
+    "bf_total": 2267416485.0,
+    "dimension": "Education (years)",
+    "value": 9.2
+  },
+  {
+    "UF": "MA",
+    "State": "Maranhão",
+    "bf_total": 2267416485.0,
+    "dimension": "Unemployment (%)",
+    "value": 10.5
+  },
+  {
+    "UF": "PA",
+    "State": "Pará",
+    "bf_total": 2137743250.0,
+    "dimension": "Sanitation access (%)",
+    "value": 70.0
+  },
+  {
+    "UF": "PA",
+    "State": "Pará",
+    "bf_total": 2137743250.0,
+    "dimension": "Unemployment (%)",
+    "value": 9.55
+  },
+  {
+    "UF": "RJ",
+    "State": "Rio de Janeiro",
+    "bf_total": 1997650048.0,
+    "dimension": "Sanitation access (%)",
+    "value": 70.0
+  },
+  {
+    "UF": "RJ",
+    "State": "Rio de Janeiro",
+    "bf_total": 1997650048.0,
+    "dimension": "Unemployment (%)",
+    "value": 12.8
+  },
+  {
+    "UF": "PB",
+    "State": "Paraíba",
+    "bf_total": 1171260420.0,
+    "dimension": "Sanitation access (%)",
+    "value": 70.0
+  },
+  {
+    "UF": "PB",
+    "State": "Paraíba",
+    "bf_total": 1171260420.0,
+    "dimension": "Unemployment (%)",
+    "value": 11.950000000000001
+  },
+  {
+    "UF": "PI",
+    "State": "Piauí",
+    "bf_total": 1069923403.0,
+    "dimension": "Sanitation access (%)",
+    "value": 73.0443640076
+  },
+  {
+    "UF": "PI",
+    "State": "Piauí",
+    "bf_total": 1069923403.0,
+    "dimension": "Education (years)",
+    "value": 9.8
+  },
+  {
+    "UF": "PI",
+    "State": "Piauí",
+    "bf_total": 1069923403.0,
+    "dimension": "Unemployment (%)",
+    "value": 10.15
+  },
+  {
+    "UF": "AM",
+    "State": "Amazonas",
+    "bf_total": 1027247072.0,
+    "dimension": "Sanitation access (%)",
+    "value": 70.0
+  },
+  {
+    "UF": "AM",
+    "State": "Amazonas",
+    "bf_total": 1027247072.0,
+    "dimension": "Unemployment (%)",
+    "value": 10.775
+  },
+  {
+    "UF": "AL",
+    "State": "Alagoas",
+    "bf_total": 889597663.0,
+    "dimension": "Sanitation access (%)",
+    "value": 45.7943718298
+  },
+  {
+    "UF": "AL",
+    "State": "Alagoas",
+    "bf_total": 889597663.0,
+    "dimension": "Unemployment (%)",
+    "value": 11.25
+  },
+  {
+    "UF": "RN",
+    "State": "Rio Grande do Norte",
+    "bf_total": 767182208.0,
+    "dimension": "Sanitation access (%)",
+    "value": 70.0
+  },
+  {
+    "UF": "RN",
+    "State": "Rio Grande do Norte",
+    "bf_total": 767182208.0,
+    "dimension": "Unemployment (%)",
+    "value": 11.675
+  },
+  {
+    "UF": "RS",
+    "State": "Rio Grande do Sul",
+    "bf_total": 765540559.0,
+    "dimension": "Sanitation access (%)",
+    "value": 70.0
+  },
+  {
+    "UF": "RS",
+    "State": "Rio Grande do Sul",
+    "bf_total": 765540559.0,
+    "dimension": "Unemployment (%)",
+    "value": 6.075
+  },
+  {
+    "UF": "PR",
+    "State": "Paraná",
+    "bf_total": 746494601.0,
+    "dimension": "Sanitation access (%)",
+    "value": 70.0
+  },
+  {
+    "UF": "PR",
+    "State": "Paraná",
+    "bf_total": 746494601.0,
+    "dimension": "Unemployment (%)",
+    "value": 5.85
+  },
+  {
+    "UF": "GO",
+    "State": "Goiás",
+    "bf_total": 554898705.0,
+    "dimension": "Sanitation access (%)",
+    "value": 70.0
+  },
+  {
+    "UF": "GO",
+    "State": "Goiás",
+    "bf_total": 554898705.0,
+    "dimension": "Unemployment (%)",
+    "value": 7.2
+  },
+  {
+    "UF": "SE",
+    "State": "Sergipe",
+    "bf_total": 544295001.0,
+    "dimension": "Sanitation access (%)",
+    "value": 70.0
+  },
+  {
+    "UF": "SE",
+    "State": "Sergipe",
+    "bf_total": 544295001.0,
+    "dimension": "Unemployment (%)",
+    "value": 13.05
+  },
+  {
+    "UF": "ES",
+    "State": "Espírito Santo",
+    "bf_total": 397852571.0,
+    "dimension": "Sanitation access (%)",
+    "value": 70.0
+  },
+  {
+    "UF": "ES",
+    "State": "Espírito Santo",
+    "bf_total": 397852571.0,
+    "dimension": "Unemployment (%)",
+    "value": 7.975
+  },
+  {
+    "UF": "MT",
+    "State": "Mato Grosso",
+    "bf_total": 313946842.0,
+    "dimension": "Sanitation access (%)",
+    "value": 70.0
+  },
+  {
+    "UF": "MT",
+    "State": "Mato Grosso",
+    "bf_total": 313946842.0,
+    "dimension": "Unemployment (%)",
+    "value": 4.3
+  },
+  {
+    "UF": "SC",
+    "State": "Santa Catarina",
+    "bf_total": 273114169.0,
+    "dimension": "Sanitation access (%)",
+    "value": 70.0
+  },
+  {
+    "UF": "SC",
+    "State": "Santa Catarina",
+    "bf_total": 273114169.0,
+    "dimension": "Unemployment (%)",
+    "value": 3.925
+  },
+  {
+    "UF": "AC",
+    "State": "Acre",
+    "bf_total": 272463902.0,
+    "dimension": "Sanitation access (%)",
+    "value": 70.0
+  },
+  {
+    "UF": "AC",
+    "State": "Acre",
+    "bf_total": 272463902.0,
+    "dimension": "Unemployment (%)",
+    "value": 11.575
+  },
+  {
+    "UF": "MS",
+    "State": "Mato Grosso do Sul",
+    "bf_total": 268377187.0,
+    "dimension": "Sanitation access (%)",
+    "value": 70.0
+  },
+  {
+    "UF": "MS",
+    "State": "Mato Grosso do Sul",
+    "bf_total": 268377187.0,
+    "dimension": "Unemployment (%)",
+    "value": 5.025
+  },
+  {
+    "UF": "TO",
+    "State": "Tocantins",
+    "bf_total": 252637155.0,
+    "dimension": "Sanitation access (%)",
+    "value": 70.0
+  },
+  {
+    "UF": "TO",
+    "State": "Tocantins",
+    "bf_total": 252637155.0,
+    "dimension": "Unemployment (%)",
+    "value": 6.4
+  },
+  {
+    "UF": "AP",
+    "State": "Amapá",
+    "bf_total": 192507491.0,
+    "dimension": "Sanitation access (%)",
+    "value": 70.0
+  },
+  {
+    "UF": "AP",
+    "State": "Amapá",
+    "bf_total": 192507491.0,
+    "dimension": "Unemployment (%)",
+    "value": 12.475000000000001
+  },
+  {
+    "UF": "DF",
+    "State": "Distrito Federal",
+    "bf_total": 180101465.0,
+    "dimension": "Sanitation access (%)",
+    "value": 70.0
+  },
+  {
+    "UF": "DF",
+    "State": "Distrito Federal",
+    "bf_total": 180101465.0,
+    "dimension": "Unemployment (%)",
+    "value": 11.375
+  },
+  {
+    "UF": "RO",
+    "State": "Rondônia",
+    "bf_total": 140539097.0,
+    "dimension": "Sanitation access (%)",
+    "value": 70.0
+  },
+  {
+    "UF": "RO",
+    "State": "Rondônia",
+    "bf_total": 140539097.0,
+    "dimension": "Unemployment (%)",
+    "value": 4.875
+  },
+  {
+    "UF": "RR",
+    "State": "Roraima",
+    "bf_total": 122808480.0,
+    "dimension": "Sanitation access (%)",
+    "value": 70.0
+  },
+  {
+    "UF": "RR",
+    "State": "Roraima",
+    "bf_total": 122808480.0,
+    "dimension": "Unemployment (%)",
+    "value": 6.125
+  }
+]

@@ -1,0 +1,121 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Chart 6 (Tuft-style): Unemployment z-scores relative to national mean (sign-inverted so higher is better). Maranhão highlighted.",
+  "data": {
+    "url": "data/charts/chart5_multidimensional_long.json"
+  },
+  "transform": [
+    { "filter": "datum.dimension === 'Unemployment (%)'" },
+
+    {
+      "joinaggregate": [
+        { "op": "mean", "field": "value", "as": "national_mean" },
+        { "op": "stdev", "field": "value", "as": "national_std" }
+      ]
+    },
+
+    { "calculate": "toNumber(datum.value)", "as": "value_num" },
+    { "calculate": "(datum.value_num - datum.national_mean) / datum.national_std", "as": "z_raw" },
+
+    { "calculate": "-1 * datum.z_raw", "as": "z_score" },
+
+    { "calculate": "datum.State === 'Maranhão'", "as": "highlight" }
+  ],
+
+  "width": 640,
+  "height": 520,
+
+  "title": {
+    "text": "Chart 6: Structural deviations from the national average (Unemployment)",
+    "subtitle": "Z-score by state (sign-inverted so higher values mean better labour-market conditions). Vertical line marks national mean (0). Maranhão highlighted.",
+    "anchor": "start",
+    "fontSize": 16,
+    "subtitleFontSize": 12,
+    "subtitlePadding": 8
+  },
+
+  "encoding": {
+    "y": {
+      "field": "State",
+      "type": "nominal",
+      "sort": { "field": "z_score", "order": "ascending" },
+      "axis": null
+    },
+    "x": {
+      "field": "z_score",
+      "type": "quantitative",
+      "title": "Standardized deviation from national mean (z-score)",
+      "axis": {
+        "grid": true,
+        "tickSize": 3,
+        "labelPadding": 6,
+        "titlePadding": 10
+      }
+    }
+  },
+
+  "layer": [
+    {
+      "mark": { "type": "rule", "strokeWidth": 2, "color": "#111111" },
+      "encoding": { "x": { "datum": 0 } }
+    },
+
+    {
+      "mark": { "type": "point", "filled": true, "size": 55 },
+      "encoding": {
+        "color": {
+          "condition": { "test": "datum.highlight", "value": "#D7301F" },
+          "value": "#BDBDBD"
+        },
+        "opacity": {
+          "condition": { "test": "datum.highlight", "value": 1.0 },
+          "value": 0.22
+        },
+        "tooltip": [
+          { "field": "State", "type": "nominal" },
+          { "field": "UF", "type": "nominal" },
+          { "field": "value", "type": "quantitative", "title": "Unemployment (%)" },
+          { "field": "z_score", "type": "quantitative", "title": "Z-score (inverted)", "format": ".2f" },
+          { "field": "bf_total", "type": "quantitative", "title": "Bolsa Família total (R$)", "format": ",.0f" }
+        ]
+      }
+    },
+
+    {
+      "mark": {
+        "type": "text",
+        "fontSize": 10,
+        "baseline": "middle",
+        "align": "right",
+        "dx": -10
+      },
+      "encoding": {
+        "text": { "field": "State" },
+        "x": { "field": "z_score", "type": "quantitative" },
+        "y": {
+          "field": "State",
+          "type": "nominal",
+          "sort": { "field": "z_score", "order": "ascending" }
+        },
+        "color": {
+          "condition": { "test": "datum.highlight", "value": "#D7301F" },
+          "value": "#4D4D4D"
+        },
+        "opacity": {
+          "condition": { "test": "datum.highlight", "value": 1.0 },
+          "value": 0.65
+        }
+      }
+    }
+  ],
+
+  "config": {
+    "view": { "stroke": null },
+    "axis": {
+      "domainColor": "#333333",
+      "labelFont": "Helvetica",
+      "titleFont": "Helvetica",
+      "gridColor": "#E6E6E6"
+    }
+  }
+}

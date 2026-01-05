@@ -111,9 +111,48 @@
             <div class="btn-container">
                 <a class="data-btn" href="data/brazil_poverty_geo_final.json" target="_blank">View Data</a>
             </div>
-            <p><strong>Interactivity:</strong> Select states in the legend to highlight their multidimensional trajectory over time.</p>
-            <div id="ChartInteractive"></div>
+            <p><strong>Interactivity:</strong> This map provides structural context for the analysis by showing poverty and sanitation conditions across Brazilian states in 2022. In addition to absolute levels, the visualization allows values to be expressed relative to the national average, highlighting regional disparities. This perspective helps explain why income transfer programs such as Bolsa Família remain particularly important in historically disadvantaged regions, especially in the Northeast.</p>
+           <div id="ChartMapBR"></div>
         </article>
+
+<article class="chart-container">
+  <h3>Chart 5: Multidimensional Poverty and Income Support</h3>
+
+  <div class="btn-container">
+    <a class="data-btn" href="data/charts/chart5_multidimensional_scatter.json" target="_blank">View Data</a>
+  </div>
+
+  <p>
+    <strong>Interactivity:</strong> Use the selector to explore how Bolsa Família transfers relate to different
+    dimensions of deprivation. The visualization contrasts income support intensity with education, employment,
+    and sanitation indicators, highlighting the multidimensional nature of poverty across Brazilian states.
+  </p>
+
+  <div id="ChartBF_MultiDim"></div>
+</article>
+<article class="chart-container">
+    <h3>Chart 6: Structural deviations from the national average</h3>
+
+    <div class="btn-container">
+        <a class="data-btn"
+           href="data/charts/chart6_structural_deviation.json"
+           target="_blank">
+           View Data (JSON)
+        </a>
+    </div>
+
+    <p>
+        This chart standardizes each deprivation indicator into a z-score relative to the national mean.
+        Values to the left of zero indicate worse structural conditions than the Brazilian average;
+        values to the right indicate better conditions.
+        To ensure consistent interpretation across indicators, the unemployment z-score is sign-inverted
+        so that higher values always correspond to better outcomes.
+        Maranhão is highlighted.
+    </p>
+
+    <div id="Chart6_StructDev"></div>
+</article>
+
 
         <hr>
 
@@ -138,28 +177,11 @@
   "data/charts/spec_chart3b_ma_pareto_2021.json",
   { actions: false }
 );
-vegaEmbed("#ChartBF_MA_MUN", "data/charts/spec_chart3_ma_municipios_2021.json", { actions: false });
+vegaEmbed("#ChartMapBR", "data/charts/spec_chart4_brazil_poverty_map_2022.json", { actions: false });
+vegaEmbed("#ChartBF_MultiDim", "data/charts/spec_chart5_multidimensional_scatter.json", { actions: false });
+vegaEmbed("#Chart6_StructDev", "data/charts/spec_chart6_structural_deviation.json", { actions: false });
 
 
-        // 4. Interactive Bubble
-        const specInteractive = {
-          "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-          "data": {"url": "data/brazil_poverty_geo_final.json"},
-          "width": 600, "height": 350,
-          "params": [{
-            "name": "stateClick",
-            "select": {"type": "point", "fields": ["properties.name"]},
-            "bind": "legend"
-          }],
-          "mark": {"type": "circle", "size": 150, "filled": true},
-          "encoding": {
-            "x": {"field": "properties.Poverty_Rate", "type": "quantitative", "title": "Poverty (%)"},
-            "y": {"field": "properties.Year", "type": "quantitative", "title": "Year", "scale": {"zero": false}},
-            "color": {"field": "properties.name", "type": "nominal", "title": "State"},
-            "opacity": {"condition": {"param": "stateClick", "value": 1}, "value": 0.1}
-          }
-        };
-        vegaEmbed('#ChartInteractive', specInteractive, opt);
     </script>
 </body>
 </html>

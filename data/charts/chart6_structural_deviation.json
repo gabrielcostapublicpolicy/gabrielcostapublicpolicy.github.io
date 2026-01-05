@@ -1,0 +1,205 @@
+[
+  {
+    "UF":"MA",
+    "State":"Maranh\u00e3o",
+    "dimension":"Education (years)",
+    "z_norm":-0.7071067812,
+    "highlight":true
+  },
+  {
+    "UF":"PI",
+    "State":"Piau\u00ed",
+    "dimension":"Education (years)",
+    "z_norm":0.7071067812,
+    "highlight":false
+  },
+  {
+    "UF":"SC",
+    "State":"Santa Catarina",
+    "dimension":"Unemployment (%)",
+    "z_norm":1.6544976269,
+    "highlight":false
+  },
+  {
+    "UF":"MT",
+    "State":"Mato Grosso",
+    "dimension":"Unemployment (%)",
+    "z_norm":1.5383673775,
+    "highlight":false
+  },
+  {
+    "UF":"RO",
+    "State":"Rond\u00f4nia",
+    "dimension":"Unemployment (%)",
+    "z_norm":1.3603009951,
+    "highlight":false
+  },
+  {
+    "UF":"MS",
+    "State":"Mato Grosso do Sul",
+    "dimension":"Unemployment (%)",
+    "z_norm":1.3138488954,
+    "highlight":false
+  },
+  {
+    "UF":"PR",
+    "State":"Paran\u00e1",
+    "dimension":"Unemployment (%)",
+    "z_norm":1.0583623467,
+    "highlight":false
+  },
+  {
+    "UF":"RS",
+    "State":"Rio Grande do Sul",
+    "dimension":"Unemployment (%)",
+    "z_norm":0.9886841971,
+    "highlight":false
+  },
+  {
+    "UF":"RR",
+    "State":"Roraima",
+    "dimension":"Unemployment (%)",
+    "z_norm":0.9732001639,
+    "highlight":false
+  },
+  {
+    "UF":"TO",
+    "State":"Tocantins",
+    "dimension":"Unemployment (%)",
+    "z_norm":0.888037981,
+    "highlight":false
+  },
+  {
+    "UF":"MG",
+    "State":"Minas Gerais",
+    "dimension":"Unemployment (%)",
+    "z_norm":0.6480354656,
+    "highlight":false
+  },
+  {
+    "UF":"GO",
+    "State":"Goi\u00e1s",
+    "dimension":"Unemployment (%)",
+    "z_norm":0.640293449,
+    "highlight":false
+  },
+  {
+    "UF":"ES",
+    "State":"Esp\u00edrito Santo",
+    "dimension":"Unemployment (%)",
+    "z_norm":0.4002909336,
+    "highlight":false
+  },
+  {
+    "UF":"SP",
+    "State":"S\u00e3o Paulo",
+    "dimension":"Unemployment (%)",
+    "z_norm":0.0519001855,
+    "highlight":false
+  },
+  {
+    "UF":"CE",
+    "State":"Cear\u00e1",
+    "dimension":"Unemployment (%)",
+    "z_norm":-0.0642300639,
+    "highlight":false
+  },
+  {
+    "UF":"PA",
+    "State":"Par\u00e1",
+    "dimension":"Unemployment (%)",
+    "z_norm":-0.0874561137,
+    "highlight":false
+  },
+  {
+    "UF":"PI",
+    "State":"Piau\u00ed",
+    "dimension":"Unemployment (%)",
+    "z_norm":-0.2732645127,
+    "highlight":false
+  },
+  {
+    "UF":"MA",
+    "State":"Maranh\u00e3o",
+    "dimension":"Unemployment (%)",
+    "z_norm":-0.3816527455,
+    "highlight":true
+  },
+  {
+    "UF":"AM",
+    "State":"Amazonas",
+    "dimension":"Unemployment (%)",
+    "z_norm":-0.4668149283,
+    "highlight":false
+  },
+  {
+    "UF":"AL",
+    "State":"Alagoas",
+    "dimension":"Unemployment (%)",
+    "z_norm":-0.6139132442,
+    "highlight":false
+  },
+  {
+    "UF":"DF",
+    "State":"Distrito Federal",
+    "dimension":"Unemployment (%)",
+    "z_norm":-0.6526233273,
+    "highlight":false
+  },
+  {
+    "UF":"AC",
+    "State":"Acre",
+    "dimension":"Unemployment (%)",
+    "z_norm":-0.7145594603,
+    "highlight":false
+  },
+  {
+    "UF":"RN",
+    "State":"Rio Grande do Norte",
+    "dimension":"Unemployment (%)",
+    "z_norm":-0.7455275268,
+    "highlight":false
+  },
+  {
+    "UF":"PB",
+    "State":"Para\u00edba",
+    "dimension":"Unemployment (%)",
+    "z_norm":-0.8306897097,
+    "highlight":false
+  },
+  {
+    "UF":"AP",
+    "State":"Amap\u00e1",
+    "dimension":"Unemployment (%)",
+    "z_norm":-0.9932720588,
+    "highlight":false
+  },
+  {
+    "UF":"RJ",
+    "State":"Rio de Janeiro",
+    "dimension":"Unemployment (%)",
+    "z_norm":-1.0939182749,
+    "highlight":false
+  },
+  {
+    "UF":"SE",
+    "State":"Sergipe",
+    "dimension":"Unemployment (%)",
+    "z_norm":-1.1713384412,
+    "highlight":false
+  },
+  {
+    "UF":"PE",
+    "State":"Pernambuco",
+    "dimension":"Unemployment (%)",
+    "z_norm":-1.5429552392,
+    "highlight":false
+  },
+  {
+    "UF":"BA",
+    "State":"Bahia",
+    "dimension":"Unemployment (%)",
+    "z_norm":-1.8836039707,
+    "highlight":false
+  }
+]

@@ -1,0 +1,108 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Brazil choropleth (2022) with selectable metric and absolute vs relative-to-national-average scaling.",
+  "width": 520,
+  "height": 420,
+
+  "data": {
+    "url": "data/brazil_poverty_geo_final.json",
+    "format": { "type": "json", "property": "features" }
+  },
+
+  "projection": { "type": "mercator" },
+
+  "params": [
+    {
+      "name": "metric",
+      "value": "Poverty rate (%)",
+      "bind": {
+        "input": "select",
+        "options": ["Poverty rate (%)", "Sanitation access (%)"],
+        "name": "metric "
+      }
+    },
+    {
+      "name": "scaleType",
+      "value": "Absolute value",
+      "bind": {
+        "input": "select",
+        "options": ["Absolute value", "Relative to national average"],
+        "name": "scale "
+      }
+    }
+  ],
+
+  "transform": [
+    {
+      "calculate": "datum.properties && (datum.properties.name || datum.properties.NAME_1 || datum.properties.NOME || datum.properties.State || datum.properties.uf || datum.properties.UF || datum.properties.sigla)",
+      "as": "state_name"
+    },
+    {
+      "lookup": "state_name",
+      "from": {
+        "data": { "url": "data/brazil_poverty_map.json" },
+        "key": "State",
+        "fields": ["Poverty_Rate", "Sanitation_Access"]
+      }
+    },
+    {
+      "calculate": "metric == 'Poverty rate (%)' ? datum.Poverty_Rate : datum.Sanitation_Access",
+      "as": "metric_value"
+    },
+    {
+      "joinaggregate": [
+        { "op": "mean", "field": "metric_value", "as": "national_mean" }
+      ]
+    },
+    {
+      "calculate": "datum.metric_value - datum.national_mean",
+      "as": "relative_value"
+    }
+  ],
+
+  "layer": [
+    {
+      "transform": [
+        { "filter": "scaleType == 'Absolute value'" }
+      ],
+      "mark": { "type": "geoshape", "stroke": "white", "strokeWidth": 0.6 },
+      "encoding": {
+        "color": {
+          "field": "metric_value",
+          "type": "quantitative",
+          "title": "Value",
+          "scale": { "scheme": "viridis" }
+        },
+        "tooltip": [
+          { "field": "state_name", "type": "nominal", "title": "State" },
+          { "field": "metric_value", "type": "quantitative", "title": "Value", "format": ".1f" }
+        ]
+      }
+    },
+
+    {
+      "transform": [
+        { "filter": "scaleType == 'Relative to national average'" }
+      ],
+      "mark": { "type": "geoshape", "stroke": "white", "strokeWidth": 0.6 },
+      "encoding": {
+        "color": {
+          "field": "relative_value",
+          "type": "quantitative",
+          "title": "Deviation from national mean",
+          "scale": { "scheme": "redblue", "domainMid": 0 }
+        },
+        "tooltip": [
+          { "field": "state_name", "type": "nominal", "title": "State" },
+          { "field": "metric_value", "type": "quantitative", "title": "Value", "format": ".1f" },
+          { "field": "relative_value", "type": "quantitative", "title": "Relative to national avg", "format": "+.1f" }
+        ]
+      }
+    }
+  ],
+
+  "config": {
+    "view": { "stroke": null },
+    "legend": { "orient": "right" }
+  }
+}

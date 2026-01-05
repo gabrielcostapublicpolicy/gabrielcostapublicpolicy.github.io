@@ -1,0 +1,130 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Chart 5: Multidimensional Poverty and Income Support (Tufte-style).",
+
+  "data": { "url": "/data/charts/chart5_multidimensional_scatter.json" },
+
+  "params": [
+    {
+      "name": "dim",
+      "value": "Unemployment (%)",
+      "bind": {
+        "input": "select",
+        "options": ["Unemployment (%)", "Education (years)", "Sanitation access (%)"],
+        "name": "Dimension: "
+      }
+    }
+  ],
+
+  "transform": [
+    {
+      "calculate": "replace(trim(toString(datum.dimension)), '\\\\s+', ' ')",
+      "as": "dimension_clean"
+    },
+    { "filter": "datum.dimension_clean === dim" },
+
+    { "calculate": "toNumber(datum.bf_total)", "as": "bf_total_num" },
+    { "calculate": "datum.bf_total_num / 1000000000", "as": "bf_billion" },
+
+    { "calculate": "toNumber(datum.value)", "as": "value_num" },
+
+    { "filter": "isFinite(datum.bf_billion) && isFinite(datum.value_num)" }
+  ],
+
+  "width": 520,
+  "height": 320,
+
+  "title": {
+    "text": "Chart 5: Multidimensional Poverty and Income Support",
+    "subtitle": "Each dot is a Brazilian state. X: Bolsa Família total payments (R$ bn, 2021). Y: selected deprivation indicator. Maranhão highlighted.",
+    "anchor": "start",
+    "fontSize": 16,
+    "subtitleFontSize": 12,
+    "subtitlePadding": 8
+  },
+
+  "layer": [
+    {
+      "mark": { "type": "point", "filled": true, "size": 70, "opacity": 0.55 },
+      "encoding": {
+        "x": {
+          "field": "bf_billion",
+          "type": "quantitative",
+          "title": "Bolsa Família total payments (R$ billions, 2021)",
+          "axis": { "grid": true, "tickCount": 6, "labelFlush": true }
+        },
+        "y": {
+          "field": "value_num",
+          "type": "quantitative",
+          "title": null,
+          "axis": { "grid": true, "tickCount": 6 }
+        },
+        "tooltip": [
+          { "field": "State", "type": "nominal", "title": "State" },
+          { "field": "UF", "type": "nominal", "title": "UF" },
+          { "field": "dimension_clean", "type": "nominal", "title": "Dimension" },
+          { "field": "bf_billion", "type": "quantitative", "title": "BF (R$ bn)", "format": ".2f" },
+          { "field": "value_num", "type": "quantitative", "title": "Indicator", "format": ".2f" }
+        ],
+        "color": {
+          "condition": { "test": "datum.UF === 'MA'", "value": "#C0392B" },
+          "value": "#6B7280"
+        }
+      }
+    },
+
+    {
+      "transform": [
+        { "aggregate": [{ "op": "mean", "field": "bf_billion", "as": "mean_x" }] }
+      ],
+      "mark": { "type": "rule", "strokeWidth": 1 },
+      "encoding": {
+        "x": { "field": "mean_x", "type": "quantitative" },
+        "color": { "value": "#111827" }
+      }
+    },
+
+    {
+      "transform": [
+        { "aggregate": [{ "op": "mean", "field": "value_num", "as": "mean_y" }] }
+      ],
+      "mark": { "type": "rule", "strokeWidth": 1 },
+      "encoding": {
+        "y": { "field": "mean_y", "type": "quantitative" },
+        "color": { "value": "#111827" }
+      }
+    },
+
+    {
+      "transform": [{ "filter": "datum.UF === 'MA'" }],
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "dx": 8,
+        "dy": -8,
+        "fontSize": 12,
+        "fontWeight": "bold"
+      },
+      "encoding": {
+        "x": { "field": "bf_billion", "type": "quantitative" },
+        "y": { "field": "value_num", "type": "quantitative" },
+        "text": { "value": "Maranhão" },
+        "color": { "value": "#C0392B" }
+      }
+    }
+  ],
+
+  "config": {
+    "background": "white",
+    "view": { "stroke": null },
+    "axis": {
+      "domain": true,
+      "domainColor": "#111827",
+      "labelColor": "#111827",
+      "titleColor": "#111827",
+      "gridColor": "#E5E7EB",
+      "labelFontSize": 11,
+      "titleFontSize": 12
+    }
+  }
+}
