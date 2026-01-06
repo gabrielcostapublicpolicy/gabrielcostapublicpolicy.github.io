@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PP434 Project — Gabriel Costa</title>
+
+  <!-- Vega stack -->
+  <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+
+  <!-- Your theme -->
+  <link rel="stylesheet" href="theme.css" />
+</head>
+
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container">
+      <nav class="nav">
+        <a class="brand" href="index.html">Gabriel Costa</a>
+        <div class="nav-links">
+          <a href="#aims">Aims</a>
+          <a href="#data">Data</a>
+          <a href="#charts">Charts</a>
+          <a href="#tools">Tools</a>
+          <a href="#conclusions">Conclusions</a>
+        </div>
+      </nav>
+
+      <section class="hero">
+        <p class="kicker">PP434 — Automated Data Visualisation for Policymaking (LSE)</p>
+        <h1>Structural Poverty, Labour Markets, and Income Support in Maranhão (Brazil)</h1>
+        <p class="subtitle">
+          Interactive evidence on Bolsa Família transfers and multidimensional deprivation using automated open-data pipelines.
+        </p>
+
+        <div class="meta">
+          <span>By Gabriel Costa</span>
+          <span class="dot">•</span>
+          <span>GitHub Pages</span>
+          <span class="dot">•</span>
+          <a href="https://github.com/gabrielcostapublicpolicy/gabrielcostapublicpolicy.github.io" target="_blank" rel="noopener">Repository</a>
+        </div>
+      </section>
+    </div>
+  </header>
+
+  <main id="main" class="container">
+    <section id="aims" class="section">
+      <h2>Aims</h2>
+      <p>
+        This project examines whether labour-market improvements (employability) are sufficient to reduce poverty in historically disadvantaged regions.
+        Focusing on Maranhão, it links income transfers to structural deprivation indicators (education, sanitation, and labour outcomes) to assess whether
+        transfer intensity aligns with multidimensional needs.
+      </p>
+    </section>
+
+    <section id="data" class="section">
+      <h2>Data</h2>
+      <p>
+        Data are retrieved programmatically from public sources (IBGE/SIDRA and related open datasets) and transformed into analysis-ready JSON files for the web.
+        Spatial layers are handled as GeoJSON. Each chart includes a direct data/spec link for transparency and replication.
+      </p>
+
+      <div class="callouts">
+        <div class="callout">
+          <h3>Open-data approach</h3>
+          <p>All chart inputs are generated automatically and published as JSON/GeoJSON in the repository.</p>
+        </div>
+        <div class="callout">
+          <h3>Replication</h3>
+          <p>Run the Python pipeline to refresh inputs, then push to GitHub Pages to update the site.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="charts" class="section">
+      <h2>Charts</h2>
+      <p class="section-lede">
+        The visuals move from national context to within-state concentration, then to multidimensional structural comparisons.
+      </p>
+
+      <!-- Chart 1 -->
+      <article class="chart-card">
+        <header class="chart-head">
+          <div>
+            <h3>Chart 1 — Bolsa Família payments by state (Jan–Nov 2021)</h3>
+            <p class="chart-note">
+              Ranked comparison of total transfers across states. Maranhão is highlighted to anchor the analysis.
+            </p>
+          </div>
+          <div class="chart-links">
+            <a class="pill" href="data/charts/spec_chart1_bf_uf_2021.json" target="_blank" rel="noopener">Spec</a>
+            <a class="pill" href="data/charts/chart1_uf_total_2021.json" target="_blank" rel="noopener">Data</a>
+          </div>
+        </header>
+        <div class="chart-wrap">
+          <div id="ChartBF_UF"></div>
+        </div>
+      </article>
+
+      <!-- Chart 2 -->
+      <article class="chart-card">
+        <header class="chart-head">
+          <div>
+            <h3>Chart 2 — Monthly totals (Maranhão vs Brazil)</h3>
+            <p class="chart-note">Monthly series comparing Maranhão with the national aggregate (2014–2021).</p>
+          </div>
+          <div class="chart-links">
+            <a class="pill" href="data/charts/spec_chart2_ma_vs_br_2014_2021.json" target="_blank" rel="noopener">Spec</a>
+            <a class="pill" href="data/charts/chart2_ma_vs_br_monthly_2014_2021.json" target="_blank" rel="noopener">Data</a>
+          </div>
+        </header>
+        <div class="chart-wrap">
+          <div id="ChartBF_MA_BR"></div>
+        </div>
+      </article>
+
+      <!-- Chart 3 -->
+      <article class="chart-card">
+        <header class="chart-head">
+          <div>
+            <h3>Chart 3 — Payments by municipality (Maranhão, 2021)</h3>
+            <p class="chart-note">
+              Concentration across municipalities (Jan–Nov 2021): large urban centres dominate, with a long tail of smaller municipalities.
+            </p>
+          </div>
+          <div class="chart-links">
+            <a class="pill" href="data/charts/spec_chart3_ma_municipios_2021.json" target="_blank" rel="noopener">Spec</a>
+            <a class="pill" href="data/charts/chart3_ma_municipios_total_2021_jan_nov.json" target="_blank" rel="noopener">Data</a>
+          </div>
+        </header>
+        <div class="chart-wrap">
+          <div id="ChartBF_MA_MUN"></div>
+        </div>
+      </article>
+
+      <!-- Chart 3b -->
+      <article class="chart-card">
+        <header class="chart-head">
+          <div>
+            <h3>Chart 3b — Concentration (Pareto curve)</h3>
+            <p class="chart-note">
+              Cumulative distribution of payments: how quickly transfers accumulate as municipalities are ordered by total receipts.
+            </p>
+          </div>
+          <div class="chart-links">
+            <a class="pill" href="data/charts/spec_chart3b_ma_pareto_2021.json" target="_blank" rel="noopener">Spec</a>
+            <a class="pill" href="data/charts/chart3_ma_municipios_total_2021_jan_nov.json" target="_blank" rel="noopener">Data</a>
+          </div>
+        </header>
+        <div class="chart-wrap">
+          <div id="ChartBF_MA_PARETO"></div>
+        </div>
+      </article>
+
+      <!-- Chart 4 -->
+      <article class="chart-card">
+        <header class="chart-head">
+          <div>
+            <h3>Chart 4 — Structural context map (Brazil, 2022)</h3>
+            <p class="chart-note">
+              Interactive mapping of poverty/sanitation conditions. Switch between absolute values and deviations from the national average to highlight disparities.
+            </p>
+          </div>
+          <div class="chart-links">
+            <a class="pill" href="data/charts/spec_chart4_brazil_poverty_map_2022.json" target="_blank" rel="noopener">Spec</a>
+            <a class="pill" href="data/brazil_poverty_geo_final.json" target="_blank" rel="noopener">Data</a>
+          </div>
+        </header>
+        <div class="chart-wrap">
+          <div id="ChartMapBR"></div>
+        </div>
+      </article>
+
+      <!-- Chart 5 -->
+      <article class="chart-card">
+        <header class="chart-head">
+          <div>
+            <h3>Chart 5 — Multidimensional poverty and income support</h3>
+            <p class="chart-note">
+              Use the selector to compare Bolsa Família intensity with education, employment, and sanitation indicators across states.
+            </p>
+          </div>
+          <div class="chart-links">
+            <a class="pill" href="data/charts/spec_chart5_multidimensional_scatter.json" target="_blank" rel="noopener">Spec</a>
+            <a class="pill" href="data/charts/chart5_multidimensional_scatter.json" target="_blank" rel="noopener">Data</a>
+          </div>
+        </header>
+        <div class="chart-wrap">
+          <div id="ChartBF_MultiDim"></div>
+        </div>
+      </article>
+
+      <!-- Chart 6 -->
+      <article class="chart-card">
+        <header class="chart-head">
+          <div>
+            <h3>Chart 6 — Structural deviations from the national average</h3>
+            <p class="chart-note">
+              Indicators are standardized (z-scores) relative to the national mean. Unemployment is sign-inverted so that higher values always indicate better outcomes.
+              Maranhão is highlighted.
+            </p>
+          </div>
+          <div class="chart-links">
+            <a class="pill" href="data/charts/spec_chart6_structural_deviation.json" target="_blank" rel="noopener">Spec</a>
+            <a class="pill" href="data/charts/chart6_structural_deviation.json" target="_blank" rel="noopener">Data</a>
+          </div>
+        </header>
+        <div class="chart-wrap">
+          <div id="Chart6_StructDev"></div>
+        </div>
+      </article>
+    </section>
+
+    <section id="tools" class="section">
+      <h2>Tools</h2>
+      <p>
+        Data are processed in <strong>Python (pandas)</strong> and exported as JSON/GeoJSON for web delivery. Visualisations are built with <strong>Vega-Lite</strong>
+        and embedded with <strong>vega-embed</strong>. The project is version-controlled with <strong>Git</strong> and published via <strong>GitHub Pages</strong>.
+      </p>
+
+      <div class="callouts">
+        <div class="callout">
+          <h3>Automation</h3>
+          <p>Pipeline produces the chart datasets and (when applicable) derived indicators, ensuring consistent updates.</p>
+        </div>
+        <div class="callout">
+          <h3>How to update</h3>
+          <ol class="howto">
+            <li>Run the Python scripts/notebooks to refresh outputs in <code>data/</code>.</li>
+            <li>Confirm charts render locally (Live Server).</li>
+            <li>Commit and push to update GitHub Pages.</li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <section id="conclusions" class="section">
+      <h2>Conclusions</h2>
+      <ul class="bullets">
+        <li>Transfers are highly concentrated geographically and correlate with structural disadvantages rather than short-term labour shocks.</li>
+        <li>Multidimensional indicators suggest that income support alone is unlikely to offset persistent deficits in sanitation and human capital.</li>
+        <li>Policy implications: combine income transfers with targeted infrastructure and education investments in lagging regions.</li>
+      </ul>
+      <p class="small">
+        Limitations: the analysis is descriptive and depends on indicator choices and aggregation level. Future work could incorporate causal identification strategies and household-level data.
+      </p>
+    </section>
+
+    <footer class="footer">
+      <p>
+        <strong>Links:</strong>
+        <a href="https://github.com/gabrielcostapublicpolicy/gabrielcostapublicpolicy.github.io" target="_blank" rel="noopener">Repository</a>
+        <span class="dot">•</span>
+        <a href="data/charts/" target="_blank" rel="noopener">Chart specs (folder)</a>
+      </p>
+    </footer>
+  </main>
+
+  <script>
+    const opt = { mode: "vega-lite", actions: false };
+
+    // Keep EXACT IDs to avoid breaking anything:
+    vegaEmbed("#ChartBF_UF", "data/charts/spec_chart1_bf_uf_2021.json", opt);
+    vegaEmbed("#ChartBF_MA_BR", "data/charts/spec_chart2_ma_vs_br_2014_2021.json", opt);
+    vegaEmbed("#ChartBF_MA_MUN", "data/charts/spec_chart3_ma_municipios_2021.json", opt);
+    vegaEmbed("#ChartBF_MA_PARETO", "data/charts/spec_chart3b_ma_pareto_2021.json", opt);
+    vegaEmbed("#ChartMapBR", "data/charts/spec_chart4_brazil_poverty_map_2022.json", opt);
+    vegaEmbed("#ChartBF_MultiDim", "data/charts/spec_chart5_multidimensional_scatter.json", opt);
+    vegaEmbed("#Chart6_StructDev", "data/charts/spec_chart6_structural_deviation.json", opt);
+  </script>
+</body>
+</html>
