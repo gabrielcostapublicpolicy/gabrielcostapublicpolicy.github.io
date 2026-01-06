@@ -37,15 +37,15 @@
           Interactive evidence on Bolsa Família transfers and multidimensional deprivation using automated open-data pipelines.
         </p>
 
-        <div class="meta">
-          <span>By Gabriel Costa</span>
-          <span class="dot">•</span>
-          <span>GitHub Pages</span>
-          <span class="dot">•</span>
-          <a href="https://github.com/gabrielcostapublicpolicy/gabrielcostapublicpolicy.github.io" target="_blank" rel="noopener">Repository</a>
-        </div>
-      </section>
-    </div>
+       <div class="meta">
+  <span>By Gabriel Costa</span>
+  <span class="dot">•</span>
+  <a href="https://github.com/gabrielcostapublicpolicy/gabrielcostapublicpolicy.github.io" target="_blank" rel="noopener">Repository</a>
+  <span class="dot">•</span>
+  <a href="https://www.linkedin.com/in/gabriel-costa-468567156/" target="_blank" rel="noopener">LinkedIn</a>
+  <span class="dot">•</span>
+  <a href="https://gabrielcostapublicpolicy.github.io/Portfolio.html" target="_blank" rel="noopener">Portfolio</a>
+</div>
   </header>
 
   <main id="main" class="container">
@@ -218,10 +218,30 @@
 
     <section id="tools" class="section">
       <h2>Tools</h2>
-      <p>
-        Data are processed in <strong>Python (pandas)</strong> and exported as JSON/GeoJSON for web delivery. Visualisations are built with <strong>Vega-Lite</strong>
-        and embedded with <strong>vega-embed</strong>. The project is version-controlled with <strong>Git</strong> and published via <strong>GitHub Pages</strong>.
-      </p>
+
+<p>
+  Data are processed in <strong>Python (pandas)</strong> and exported as JSON and GeoJSON for web delivery.
+  Interactive visualisations are built with <strong>Vega-Lite</strong> and embedded using
+  <strong>vega-embed</strong>. The project is version-controlled with <strong>Git</strong>
+  and published via <strong>GitHub Pages</strong>.
+</p>
+
+<p>
+  <strong>Automation, Replicability, and Data Integrity (Critical Note).</strong>
+  The analytical workflow is fully documented in a consolidated Python notebook that specifies
+  all data extraction, transformation, and export steps. In practice, data reliability posed
+  important constraints: the IBGE SIDRA API proved unstable (timeouts and occasional incomplete
+  payloads), while historical Bolsa Família microdata (2014 and 2021) required manual month-by-month
+  downloading and memory-efficient chunk processing due to scale and schema differences across years.
+  For transparency, these limitations are explicitly recorded in the replication notebook.
+</p>
+
+<p>
+  <a href="https://colab.research.google.com/drive/1WQ8RIetlGUOCReoFfs1Qkwran2eWktTO?usp=sharing" target="_blank" rel="noopener">
+    Replication notebook (Google Colab)
+  </a>
+</p>
+
 
       <div class="callouts">
         <div class="callout">
