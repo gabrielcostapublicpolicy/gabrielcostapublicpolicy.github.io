@@ -54,11 +54,11 @@
           "axis": { "grid": true, "tickCount": 6, "labelFlush": true }
         },
         "y": {
-          "field": "value_num",
-          "type": "quantitative",
-          "title": null,
-          "axis": { "grid": true, "tickCount": 6 }
-        },
+  "field": "value",
+  "type": "quantitative",
+  "axis": {"title": "Selected indicator (units vary)"}
+}
+,
         "tooltip": [
           { "field": "State", "type": "nominal", "title": "State" },
           { "field": "UF", "type": "nominal", "title": "UF" },

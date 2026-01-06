@@ -10,7 +10,8 @@
   "height": 420,
   "mark": "bar",
   "encoding": {
-    "y": { "field": "municipio_name", "type": "nominal", "sort": "-x", "title": null },
+    "y": { "field": "municipio_name", "type": "nominal", "sort": "-x", "title": null }, "axis": {"title": null, "labelExpr": "replace(datum.label, /\\n.*/, '')"},
+
     "x": { "field": "total_paid", "type": "quantitative", "title": "Total payments (R$)", "axis": { "format": "s" } },
     "tooltip": [
       { "field": "municipio_name", "type": "nominal", "title": "Municipality" },

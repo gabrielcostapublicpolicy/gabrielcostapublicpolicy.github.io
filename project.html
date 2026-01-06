@@ -20,7 +20,7 @@
   <header class="site-header">
     <div class="container">
       <nav class="nav">
-        <a class="brand" href="index.html">Gabriel Costa</a>
+        <span class="brand">Gabriel Costa</span>
         <div class="nav-links">
           <a href="#aims">Aims</a>
           <a href="#data">Data</a>
@@ -32,9 +32,9 @@
 
       <section class="hero">
         <p class="kicker">PP434 — Automated Data Visualisation for Policymaking (LSE)</p>
-        <h1>Structural Poverty, Labour Markets, and Income Support in Maranhão (Brazil)</h1>
+        <h1>Income support and structural deprivation in Maranhão (Brazil): descriptive evidence from Bolsa Família and related indicators</h1>
         <p class="subtitle">
-          Interactive evidence on Bolsa Família transfers and multidimensional deprivation using automated open-data pipelines.
+          An automated, reproducible pipeline for descriptive comparisons across time, states, and deprivation indicators.
         </p>
 
        <div class="meta">
@@ -52,17 +52,17 @@
     <section id="aims" class="section">
       <h2>Aims</h2>
       <p>
-        This project examines whether labour-market improvements (employability) are sufficient to reduce poverty in historically disadvantaged regions.
-        Focusing on Maranhão, it links income transfers to structural deprivation indicators (education, sanitation, and labour outcomes) to assess whether
-        transfer intensity aligns with multidimensional needs.
+        This project provides descriptive evidence on the relationship between income support and
+structural deprivation in Brazil, with a focus on Maranhão. It documents how Bolsa Família
+transfers are distributed across states and municipalities and compares these patterns with
+selected indicators of poverty, sanitation, education, and labour-market conditions.
       </p>
     </section>
 
     <section id="data" class="section">
       <h2>Data</h2>
       <p>
-        Data are retrieved programmatically from public sources (IBGE/SIDRA and related open datasets) and transformed into analysis-ready JSON files for the web.
-        Spatial layers are handled as GeoJSON. Each chart includes a direct data/spec link for transparency and replication.
+       Data are retrieved programmatically from public sources (primarily IBGE/SIDRA) and transformed into analysis-ready JSON and GeoJSON files for web-based visualisation. Indicators are aggregated at the state or municipality level, depending on availability. All charts are generated from reproducible inputs and include direct links to the underlying data and visualisation specifications to ensure transparency and replication.
       </p>
 
       <div class="callouts">
@@ -89,7 +89,7 @@
           <div>
             <h3>Chart 1 — Bolsa Família payments by state (Jan–Nov 2021)</h3>
             <p class="chart-note">
-              Ranked comparison of total transfers across states. Maranhão is highlighted to anchor the analysis.
+              This chart benchmarks Bolsa Família transfers across states (Jan–Nov 2021), highlighting Maranhão. Maranhão ranks among the highest recipients in total value, motivating a deeper look at how transfers relate to structural deprivation and labour outcomes. As totals combine population size and eligibility, the figure is descriptive and does not imply program impact.
             </p>
           </div>
           <div class="chart-links">
@@ -107,7 +107,7 @@
         <header class="chart-head">
           <div>
             <h3>Chart 2 — Monthly totals (Maranhão vs Brazil)</h3>
-            <p class="chart-note">Monthly series comparing Maranhão with the national aggregate (2014–2021).</p>
+            <p class="chart-note">Monthly series compare Maranhão with the national aggregate to assess whether the state follows the same temporal pattern in transfer volumes. The objective is descriptive: identify co-movement, breaks, and potential institutional shifts. Values are nominal and should be interpreted as administrative totals rather than causal responses to policy shocks.</p>
           </div>
           <div class="chart-links">
             <a class="pill" href="data/charts/spec_chart2_ma_vs_br_2014_2021.json" target="_blank" rel="noopener">Spec</a>
@@ -123,9 +123,9 @@
       <article class="chart-card">
         <header class="chart-head">
           <div>
-            <h3>Chart 3 — Payments by municipality (Maranhão, 2021)</h3>
+            <h3>Chart 3 — Within Maranhão, transfers are concentrated</h3>
             <p class="chart-note">
-              Concentration across municipalities (Jan–Nov 2021): large urban centres dominate, with a long tail of smaller municipalities.
+              Focusing on Maranhão (2021), payments are highly concentrated in a small set of municipalities, led by major urban centres. This distribution matters for policy design: statewide totals can hide strong geographic concentration, suggesting that complementary interventions (employment services, education, sanitation) may need to be prioritised where both need and administrative scale are greatest.
             </p>
           </div>
           <div class="chart-links">
@@ -142,9 +142,9 @@
       <article class="chart-card">
         <header class="chart-head">
           <div>
-            <h3>Chart 3b — Concentration (Pareto curve)</h3>
+            <h3>Chart 3b — How concentrated? A cumulative view</h3>
             <p class="chart-note">
-              Cumulative distribution of payments: how quickly transfers accumulate as municipalities are ordered by total receipts.
+              The Pareto curve summarises concentration by showing how quickly cumulative transfers accumulate as municipalities are ranked by total receipts. A steep curve indicates that a small share of municipalities accounts for a large share of total payments - useful for discussing scale, administrative capacity, and where place-based policies may have the highest reach.
             </p>
           </div>
           <div class="chart-links">
@@ -163,7 +163,7 @@
           <div>
             <h3>Chart 4 — Structural context map (Brazil, 2022)</h3>
             <p class="chart-note">
-              Interactive mapping of poverty/sanitation conditions. Switch between absolute values and deviations from the national average to highlight disparities.
+              To interpret transfer patterns, I add a structural context map using two non-monetary indicators: poverty rates and sanitation access. The purpose is not to claim that Bolsa Família determines these outcomes, but to locate Maranhão (and other states) within broader, persistent development gaps that shape policy needs. The ‘absolute’ view shows levels, while the ‘relative’ view highlights deviations from the national average, making spatial disparities easier to compare. Expanding to a broader multidimensional set was planned, but data availability and API stability constrained the number of consistent indicators that could be integrated end-to-end
             </p>
           </div>
           <div class="chart-links">
@@ -182,7 +182,7 @@
           <div>
             <h3>Chart 5 — Multidimensional poverty and income support</h3>
             <p class="chart-note">
-              Use the selector to compare Bolsa Família intensity with education, employment, and sanitation indicators across states.
+              This scatter compares Bolsa Família totals (x-axis) with a selected deprivation indicator (y-axis), with Maranhão highlighted. The black reference lines mark national means on each axis, splitting the chart into quadrants. Points to the right of the vertical line indicate above-average transfer totals; points above/below the horizontal line indicate worse/better indicator values depending on the metric. This framing supports careful, descriptive comparisons (e.g., whether high-transfer states also appear structurally disadvantaged), without attributing causal effects. For the education indicator, only a small subset of states returned valid values under the extraction constraints, so the plot becomes sparse. I keep it visible for transparency, but interpret it cautiously and prioritise indicators with fuller coverage.
             </p>
           </div>
           <div class="chart-links">
@@ -201,8 +201,7 @@
           <div>
             <h3>Chart 6 — Structural deviations from the national average</h3>
             <p class="chart-note">
-              Indicators are standardized (z-scores) relative to the national mean. Unemployment is sign-inverted so that higher values always indicate better outcomes.
-              Maranhão is highlighted.
+              This chart standardises indicators as z-scores relative to the national mean, so values can be compared on a common scale. For interpretability, unemployment is sign-inverted so that higher values always indicate better labour-market conditions. Maranhão’s position summarises how far it sits from the national benchmark on the selected dimension, providing a compact ‘deviation profile’ rather than a causal claim.
             </p>
           </div>
           <div class="chart-links">
@@ -262,12 +261,12 @@
     <section id="conclusions" class="section">
       <h2>Conclusions</h2>
       <ul class="bullets">
-        <li>Transfers are highly concentrated geographically and correlate with structural disadvantages rather than short-term labour shocks.</li>
-        <li>Multidimensional indicators suggest that income support alone is unlikely to offset persistent deficits in sanitation and human capital.</li>
-        <li>Policy implications: combine income transfers with targeted infrastructure and education investments in lagging regions.</li>
+        <li>The visual evidence shows that Bolsa Família transfers are unevenly distributed across Brazil and, within Maranhão, across municipalities. At the municipal level, higher totals are concentrated in large urban centres, a pattern that is mechanically related to population size and administrative scale rather than indicative of targeting failures or inefficiencies. These results are therefore descriptive, documenting how transfers are spatially distributed rather than evaluating their adequacy or impact.</li>
+        <li>When transfers are examined alongside structural indicators—such as poverty rates, sanitation access, and labour-market conditions—the visuals suggest that higher transfer volumes tend to coincide with regions facing deeper and more persistent forms of deprivation. This alignment is consistent with a needs-based allocation logic, but the analysis does not attempt to establish causal relationships between income support and observed socioeconomic outcomes.</li>
+        <li>The main analytical contribution of the project lies in transparency and reproducibility. The entire workflow—from data extraction to web-based visualisation—is documented, and data limitations (including API instability and incomplete indicator coverage) are explicitly recorded rather than implicitly ignored.</li>
       </ul>
       <p class="small">
-        Limitations: the analysis is descriptive and depends on indicator choices and aggregation level. Future work could incorporate causal identification strategies and household-level data.
+        Limitations: This project is intentionally descriptive. It relies on aggregate indicators, faces gaps in multidimensional data availability, and does not incorporate identification strategies or household-level information. These constraints limit the scope for causal interpretation. Future research will build on this exploratory mapping in my policy paper “Integrated Strategy for Maranhão: Leveraging Socioproductive Inclusion as the Engine for Sustainable Poverty Reduction and Local Economic Growth.” That work will move beyond descriptive associations to examine how income support can be combined with labour-market inclusion, productive capacity, and local development policies to address the structural roots of poverty in Maranhão in a more integrated and analytically robust framework.
       </p>
     </section>
 

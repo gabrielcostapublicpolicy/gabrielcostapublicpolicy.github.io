@@ -16,7 +16,7 @@
       "field": "total_pago_2021",
       "type": "quantitative",
       "title": "Total paid (R$ billions, nominal)",
-      "axis": {"format": ".2f"}
+      "axis": {"format": "~s"}
     },
     "color": {
       "field": "highlight",
