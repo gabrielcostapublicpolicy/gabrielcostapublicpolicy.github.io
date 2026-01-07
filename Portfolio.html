@@ -225,16 +225,6 @@
     }
 </style>
 
-<!-- JavaScript Loop to embed charts (add to bottom of page, after other vegaEmbed calls) -->
-<script>
-    // CC6: JavaScript loop to embed the six dashboard charts
-    // This satisfies the 2nd point requirement (loop in JavaScript)
-    for (let i = 1; i <= 6; i++) {
-        vegaEmbed(`#chart${i}`, `cc6_series${i}.json`);
-    }
-</script>
-
-
 
 <section>
   <div class="chart-description">
@@ -243,7 +233,8 @@
       This chart shows the monthly average price and the month-on-month inflation rate computed from the microdata.
     </p>
   </div>
-  <figure id="Location10"></figure>
+ <figure id="Location12"></figure>
+
 </section>
 
     <!-- Do you want to add more sections? -->
@@ -270,15 +261,13 @@
         vegaEmbed('#Location7', "data/wk4_inflation_corrected.json") 
         vegaEmbed('#Location8', "data/wk5_productivity_api.json")
         vegaEmbed('#Location9', "data/wk5_scraped_data (2).json")
-
-        // CC6: JavaScript loop updated to look inside the /data folder
-        for (let i = 1; i <= 6; i++) {
-            // Updated path to include data/ before the filename
-            vegaEmbed(`#chart${i}`, `data/cc6_series${i}.json`);
-        }
+for (let i = 1; i <= 6; i++) {
+  vegaEmbed(`#chart${i}`, `data/cc6_series${i}.json`);
+}
 
         // Location 10 was already correct, but kept here for consistency
-        vegaEmbed('#Location10', "data/cc8_monthly_inflation_chart.json")
+       vegaEmbed('#Location12', "data/cc8_monthly_inflation_chart.json")
+
 
     </script>
 

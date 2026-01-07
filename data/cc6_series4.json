@@ -7,7 +7,8 @@
   "width": "container",
   "height": 250,
   "data": {
-    "url": "https://raw.githubusercontent.com/gabrielcostapublicpolicy/gabrielcostapublicpolicy.github.io/main/cc6_data4.json"
+    "data": { "url": "cc6_data4.json" }
+
   },
   "mark": {
     "type": "area",

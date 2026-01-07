@@ -6,7 +6,7 @@
     "anchor": "start"
   },
   "data": {
-    "url": "https://raw.githubusercontent.com/gabrielcostapublicpolicy/gabrielcostapublicpolicy.github.io/refs/heads/main/comparative_poverty.csv",
+    "data": { "url": "comparative_poverty.csv", "format": {"type": "csv"} },
     "format": {"type": "csv"}
   },
   "width": 500,

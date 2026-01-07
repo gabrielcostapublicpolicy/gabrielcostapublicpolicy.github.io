@@ -9,9 +9,7 @@
   },
   "width": 500,
   "height": 300,
-  "data": {
-    "url": "https://raw.githubusercontent.com/gabrielcostapublicpolicy/gabrielcostapublicpolicy.github.io/refs/heads/main/wk5_scraped_data.json"
-  },
+    "data": {"url": "wk5_scraped_data_values.json"},
   "mark": {"type": "line", "point": true, "strokeWidth": 2},
   "encoding": {
     "x": {

@@ -6,7 +6,7 @@
     "anchor": "start"
   },
   "data": {
-    "url": "https://raw.githubusercontent.com/gabrielcostapublicpolicy/gabrielcostapublicpolicy.github.io/refs/heads/main/inequality_comparison.csv",
+    "data": { "url": "inequality_comparison.csv", "format": {"type": "csv"} },
     "format": {"type": "csv"}
   },
   "width": 500,
