@@ -6,10 +6,7 @@
   },
   "width": "container",
   "height": 250,
-  "data": {
-    "data": { "url": "cc6_data6.json" }
-
-  },
+    "data": { "url": "data/cc6_data6.json" },
   "mark": {
     "type": "line",
     "strokeWidth": 2,

@@ -1,28 +1,20 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "title": {
-    "text": "Women's Labor Force Participation",
-    "fontSize": 12
-  },
+  "title": {"text": "Women's Labor Force Participation", "fontSize": 12},
   "width": "container",
   "height": 250,
-  "data": {
-    "data": { "url": "cc6_data1.json" }
 
-  },
-  "mark": {
-    "type": "line",
-    "strokeWidth": 2,
-    "color": "#e74c3c"
-  },
+  "data": {
+  "url": "data/cc6_data1.json"
+}
+,
+
+  "mark": {"type": "line", "strokeWidth": 2},
   "encoding": {
     "x": {
       "field": "date",
       "type": "temporal",
-      "title": null,
-      "axis": {
-        "format": "%Y"
-      }
+      "axis": {"format": "%Y"}
     },
     "y": {
       "field": "value",
@@ -30,18 +22,8 @@
       "title": "Rate (%)"
     },
     "tooltip": [
-      {
-        "field": "date",
-        "type": "temporal",
-        "format": "%Y-%m",
-        "title": "Date"
-      },
-      {
-        "field": "value",
-        "type": "quantitative",
-        "format": ".1f",
-        "title": "Rate (%)"
-      }
+      {"field": "date", "type": "temporal", "title": "Date", "format": "%Y-%m"},
+      {"field": "value", "type": "quantitative", "title": "Rate (%)", "format": ".1f"}
     ]
   }
 }

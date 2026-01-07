@@ -6,9 +6,9 @@
     "anchor": "start"
   },
   "data": {
-    "data": { "url": "inequality_comparison.csv", "format": {"type": "csv"} },
-    "format": {"type": "csv"}
-  },
+  "url": "data/inequality_comparison.csv",
+  "format": {"type": "csv"}
+},
   "width": 500,
   "height": 300,
   "layer": [

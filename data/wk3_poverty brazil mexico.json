@@ -6,9 +6,9 @@
     "anchor": "start"
   },
   "data": {
-    "data": { "url": "comparative_poverty.csv", "format": {"type": "csv"} },
-    "format": {"type": "csv"}
-  },
+  "url": "data/comparative_poverty.csv",
+  "format": {"type": "csv"}
+},
   "width": 500,
   "height": 300,
   "layer": [
